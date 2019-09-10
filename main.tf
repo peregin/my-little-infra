@@ -19,29 +19,45 @@ provider "aws" {
 
 # create an EC2 instance
 resource "aws_instance" "web" {
-  # AMI ID for Centos 7 x86_64 https://wiki.centos.org/Cloud/AWS
-  # version 1801_01
-  ami = "ami-4bf3d731"
+  # https://aws.amazon.com/marketplace/pp/B00O7WM7QW
+  # version 1901_01
+  ami = "ami-d5bf2caa"
   instance_type = "t2.micro"
   key_name      = "aws-peregin"
-  vpc_security_group_ids = [aws_security_group.instance.id]
-
-  user_data = <<-EOF
-              #!/bin/bash
-              echo "Hello, World" > index.html
-              nohup busybox httpd -f -p "${var.server_port}" &
-              EOF
   tags = {
     Name = "web-infra"
   }
+  vpc_security_group_ids = [aws_security_group.instance.id]
 }
 
 resource "aws_security_group" "instance" {
   name = "web-instance"
+  description = "web security group"
+  tags = {
+    Name = "http-ssh"
+  }
+
+  # Inbound HTTP from anywhere
   ingress {
     from_port   = var.server_port
     to_port     = var.server_port
     protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # Inbound SSH from anywhere
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # Outbound everything
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
