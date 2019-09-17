@@ -24,7 +24,7 @@ Creates and keeps up to date infrastructure.
 machine.sh <env> [command]
 ```
 
-## Setup
+## Provision
 Provisions the infrastructure.
 ```bash
 # env local|aws
