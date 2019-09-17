@@ -10,21 +10,26 @@ Repository provides the setup for creating local (VirtualBox) or remote (AWS) in
   * aws setup for config (region) and credentials (access key id, secret access key)
 * [Ansible](https://www.ansible.com/) for provisioning tool
   
-# Setup
+# Overview
 The setup consists of two steps, setting up the machines (locally or remotely) and provisioning the application
 deployment and configuration.
 
+![overview](https://raw.github.com/peregin/my-little-infra/master/doc/infra.png "infra")
+
 ## Machine
+Creates and keeps up to date infrastructure.
 ```bash
 # env local|aws
 # command create|destroy
 machine.sh <env> [command]
 ```
 
-## Provision
+## Setup
+Provisions the infrastructure.
 ```bash
 # env local|aws
 provision.sh <env>
 ```
+
 
 
