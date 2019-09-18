@@ -1,7 +1,22 @@
 #!/usr/bin/env bash
 
-ENVIRONMENT=$1
-if [ -z "$ENVIRONMENT" ]; then
-    echo "Usage: echo $(basename "$0") <ENVRIRONMENT>"
+ENVIRONMENT=$(echo "$1" | awk '{print tolower($0)}')
+
+function printUsage() {
+  echo $"Usage: $(basename "$0") {local|aws} [create|destroy]"
+}
+
+case "$ENVIRONMENT" in
+  "local")
+    setupWithVagrant $ENVIRONMENT $ACTION
+    ;;
+  "aws")
+    setupWithTerraform $ENVIRONMENT $ACTION
+    ;;
+  *)
+    printUsage
     exit 1
-fi
+    ;;
+esac
+
+echo "environment is $ENVIRONMENT"
