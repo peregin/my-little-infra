@@ -3,21 +3,22 @@
 ENVIRONMENT=$(echo "$1" | awk '{print tolower($0)}')
 ACTION=$(echo "$2" | awk '{print tolower($0)}')
 if [ -z "$ACTION" ]; then
-  ACTION="create"
+  if [ "$ENVIRONMENT" == "local" ]; then
+    ACTION="up"
+  else
+    ACTION="create"
+  fi
 fi
+echo "environment[$ENVIRONMENT] action[$ACTION]"
 
 function printUsage() {
   echo $"Usage: $(basename "$0") {local|aws} [create|destroy]"
 }
 
-case "$ACTION" in
-  "create"|"destroy")
-    ;;
-  *)
-    printUsage
-    exit 1
-    ;;
-esac
+function setupWithVagrant() {
+  cd machine/local
+  cd ../..
+}
 
 case "$ENVIRONMENT" in
   "local")
@@ -31,5 +32,3 @@ case "$ENVIRONMENT" in
     exit 1
     ;;
 esac
-
-echo "environment is $ENVIRONMENT"
