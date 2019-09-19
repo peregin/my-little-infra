@@ -1,0 +1,6 @@
+---
+- name: "velolocal"
+  box-image: "centos/7"
+  ip: "192.168.0.11"
+  reserved_ports: [9999]
+  max-ram: 2500

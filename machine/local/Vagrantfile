@@ -1,0 +1,42 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require 'yaml'
+
+topology = []
+
+# read the ENVIRONMENT config:
+environment = ENV["ENVIRONMENT"]
+abort("ENVIRONMENT not set") if environment.to_s.empty?
+
+# load setup from yaml
+configFile = "#{environment}.yml"
+puts "# Loading config from #{configFile}"
+topology = YAML.load_file(File.join(File.dirname(__FILE__), configFile))
+
+vagrantFileApiVersion = '2'
+Vagrant.configure(vagrantFileApiVersion) do |config|
+  topology.each do |setup|
+    config.vm.define setup['name'] do |srv|
+      # basic setup
+      srv.vm.box = setup['box-image']
+      srv.vm.hostname = setup['name']
+
+      # networking setup
+      srv.vm.network :private_network, ip: setup['ip']
+      unless setup['reserved_ports'].nil?
+        for i in setup['reserved_ports']
+    	  srv.vm.network :forwarded_port, guest: i, host: i
+        end
+      end
+      srv.vm.provider "virtualbox" do |vb|
+        if setup['max-ram'].nil?
+          vb.memory = 1024
+        else
+          vb.memory = setup['max-ram']
+        end
+        vb.cpus = 1
+      end
+    end # config.vm.define
+  end # topology.each
+end

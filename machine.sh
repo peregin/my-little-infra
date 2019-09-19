@@ -1,31 +1,34 @@
 #!/usr/bin/env bash
 
 ENVIRONMENT=$(echo "$1" | awk '{print tolower($0)}')
-ACTION=$(echo "$2" | awk '{print tolower($0)}')
-if [ -z "$ACTION" ]; then
+COMMAND=$(echo "$2" | awk '{print tolower($0)}')
+if [ -z "$COMMAND" ]; then
+  # setup default commands
   if [ "$ENVIRONMENT" == "local" ]; then
-    ACTION="up"
+    COMMAND="up"
   else
-    ACTION="create"
+    COMMAND="create"
   fi
 fi
-echo "environment[$ENVIRONMENT] action[$ACTION]"
+echo "environment[$ENVIRONMENT] command [$COMMAND]"
 
 function printUsage() {
-  echo $"Usage: $(basename "$0") {local|aws} [create|destroy]"
+  echo $"Usage: $(basename "$0") <local|aws> [command]"
 }
 
 function setupWithVagrant() {
   cd machine/local
+  export ENVIRONMENT
+  vagrant $COMMAND $3 $4 $5
   cd ../..
 }
 
 case "$ENVIRONMENT" in
   "local")
-    setupWithVagrant $ENVIRONMENT $ACTION
+    setupWithVagrant $ENVIRONMENT $COMMAND
     ;;
   "aws")
-    setupWithTerraform $ENVIRONMENT $ACTION
+    setupWithTerraform $ENVIRONMENT $COMMAND
     ;;
   *)
     printUsage
