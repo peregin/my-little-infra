@@ -1,0 +1,6 @@
+---
+- hosts: velolocal
+  gather_facts: no
+  roles:
+    - scala
+

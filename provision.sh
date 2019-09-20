@@ -9,8 +9,8 @@ function printUsage() {
 echo "environment[$ENVIRONMENT]"
 
 case "$ENVIRONMENT" in
-  "local|aws")
-    setupWithAnsible $ENVIRONMENT
+  "local"|"aws")
+    ansible-playbook provision/playbook/site.yml
     ;;
   *)
     printUsage
