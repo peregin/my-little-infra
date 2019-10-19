@@ -3,7 +3,7 @@
 .cache
 .vagrant
 .idea/*
-.terraform/*
+.terraform
 bin/
 target/
 gen/
