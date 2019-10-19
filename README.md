@@ -1,6 +1,7 @@
 # Web Infrastructure
 
-Repository provides the setup for creating local (VirtualBox) or remote (AWS) infrastructure.
+The repository provides the code to create local (VirtualBox) and remote (AWS) infrastructure for
+a web application stack.
 
 ## Prerequisites
 
