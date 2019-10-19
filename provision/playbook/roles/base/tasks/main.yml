@@ -7,4 +7,5 @@
     - yum-utils
     - httpd-tools
     - python2-pip
+    - vim
   become: true
