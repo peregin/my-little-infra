@@ -1,9 +1,3 @@
-- name: install yum utils
-  yum:
-    name: yum-utils
-    state: present
-  become: true
-
 - name: install device-mapper-persistent-data
   yum:
     name: device-mapper-persistent-data
@@ -16,30 +10,44 @@
     state: present
   become: true
 
-- name: add Docker repo
+- name: add docker-{{docker_edition}} repo
   get_url:
-    url: https://download.docker.com/linux/centos/docker-ce.repo
-    dest: /etc/yum.repos.d/docker-ce.repo
+    url: https://download.docker.com/linux/centos/docker-{{docker_edition}}.repo
+    dest: /etc/yum.repos.d/docker-{{docker_edition}}.repo
   become: yes
 
-- name: enable Docker Edge repo
+- name: enable docker {{docker_edition}} repo
   ini_file:
-    dest: /etc/yum.repos.d/docker-ce.repo
-    section: 'docker-ce-edge'
+    dest: /etc/yum.repos.d/docker-{{docker_edition}}.repo
+    section: 'docker-{{docker_edition}}-{{docker_channel}}'
     option: enabled
     value: 0
   become: yes
 
-- name: enable Docker Test repo
+- name: enable docker test repo
   ini_file:
-    dest: /etc/yum.repos.d/docker-ce.repo
-    section: 'docker-ce-test'
+    dest: /etc/yum.repos.d/docker-{{docker_edition}}.repo
+    section: 'docker-{{docker_edition}}-test'
     option: enabled
     value: 0
   become: yes
 
-- name: install docker
+- name: install docker-{{docker_edition}}
   yum:
-    name: docker-ce
+    name: docker-{{docker_edition}}
     state: present
   become: true
+
+- name: start docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+  become: yes
+
+- name: add user {{ansible_user}} to docker group
+  user:
+    name: "{{ansible_user}}"
+    groups: docker
+    append: yes
+  become: yes
