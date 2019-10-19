@@ -1,0 +1,5 @@
+- name: install prerequisite packages
+  yum:
+    name: epel-release
+    state: present
+  become: true

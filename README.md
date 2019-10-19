@@ -11,24 +11,31 @@ Repository provides the setup for creating local (VirtualBox) or remote (AWS) in
 * [Ansible](https://www.ansible.com/) for provisioning tool
   
 # Overview
-The setup consists of two steps, setting up the machines (locally or remotely) and provisioning the application
-deployment and configuration.
+The setup consists of the following steps, setting up the machines (locally or remotely)
+, provisioning the infrastructure and deploying the application stack.
 
 ![overview](https://raw.github.com/peregin/my-little-infra/master/doc/infra.png "infra")
 
-## Machine
-Creates and keeps up to date infrastructure.
+## Machines in the Infrastructure
+Creates and and destroys the infrastructure (looked as abstractions over machines).
 ```bash
 # env local|aws
 # command create|destroy
 machine.sh <env> [command]
 ```
 
-## Provision
-Provisions the infrastructure.
+## Provision the Infrastructure
+Installs and configures the infrastructure.
 ```bash
 # env local|aws
 provision.sh <env>
+```
+
+## Application Stack Deployment
+Deploys the application stack mainly running in docker containers.
+```bash
+# env local|aws
+deploy.sh <env>
 ```
 
 

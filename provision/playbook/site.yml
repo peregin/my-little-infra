@@ -1,6 +1,8 @@
 ---
-- hosts: velolocal
+- hosts: appserver
   gather_facts: no
   roles:
-    - scala
+    - epel
+    - nginx
+    - docker
 
