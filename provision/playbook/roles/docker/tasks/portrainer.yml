@@ -1,0 +1,23 @@
+---
+- name: "deploy portainer to {{ inventory_hostname }}"
+  docker_container:
+    name: portainer
+    image: "portainer/portainer:latest"
+    state: started
+    detach: true
+    recreate: false
+    restart_policy: always
+    published_ports: "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  register: portainer_docker
+
+- set_fact:
+    portainer_is_running: "{{ portainer_docker.ansible_facts.docker_container.State.Running }}"
+
+- set_fact:
+    portainer_endpoint: "http://{{ portainer_docker.ansible_facts.docker_container.NetworkSettings.IPAddress }}:9000/api"
+
+- name: print portainer endpoint
+  debug:
+    msg: "portrainer running:{{ portainer_is_running }}, endpoint: {{ portainer_endpoint }}"

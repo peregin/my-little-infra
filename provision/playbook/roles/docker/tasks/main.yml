@@ -1,13 +1,16 @@
-- name: install device-mapper-persistent-data
+---
+- name: install docker dependencies
   yum:
-    name: device-mapper-persistent-data
+    name: "{{ item }}"
     state: present
+  with_items:
+    - device-mapper-persistent-data
+    - lvm2
   become: true
 
-- name: install lvm2
-  yum:
-    name: lvm2
-    state: present
+- name: install pip dependencies
+  pip:
+    name: docker-py
   become: true
 
 - name: add docker-{{docker_edition}} repo
@@ -51,3 +54,5 @@
     groups: docker
     append: yes
   become: yes
+
+- include_tasks: portrainer.yml
