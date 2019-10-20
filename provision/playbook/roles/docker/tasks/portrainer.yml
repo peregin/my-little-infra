@@ -1,7 +1,7 @@
 ---
-
 - name: encrypt admin password
   shell: "htpasswd -nb -B admin {{ lookup('env', 'ADMIN_PASSWORD') }} | cut -d ':' -f 2"
+  changed_when: false
   register: admin_password_enc
 
 - name: "deploy portainer to {{ inventory_hostname }}"

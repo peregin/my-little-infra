@@ -17,4 +17,4 @@ logs/
 *.log
 *.backup
 *.tfstate
-/provision/playbook/site.retry
+*.retry

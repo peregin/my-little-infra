@@ -36,7 +36,8 @@ provision.sh <env>
 Deploys the application stack mainly running in docker containers.
 ```bash
 # env local|aws
-deploy.sh <env>
+# stack velocorner|any-app-stack
+deploy.sh <env> <stack>
 ```
 
 

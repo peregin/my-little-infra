@@ -1,0 +1,10 @@
+---
+- name: copy docker compose
+  copy:
+    src: "files/velocorner-compose.yml"
+    dest: "/opt/velocorner-compose.yml"
+  become: true
+
+- name: deploy velocorner stack
+  shell: "docker stack deploy --compose-file /opt/velocorner-compose.yml velocorner"
+  become: true

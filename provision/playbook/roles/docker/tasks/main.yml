@@ -55,4 +55,7 @@
     append: yes
   become: yes
 
+- include_tasks: swarm.yml
+
 - include_tasks: portrainer.yml
+

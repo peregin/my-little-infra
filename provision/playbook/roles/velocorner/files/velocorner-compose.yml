@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  database:
+    image: orientdb:3.0.24
+    ports:
+      - 2480:2480
+      - 2424:2424
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+    networks:
+      - backend
+
+networks:
+  backend:

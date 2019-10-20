@@ -1,0 +1,15 @@
+---
+- name: determine swarm status
+  shell: "docker info | grep 'Swarm:' | cut -d: -f2 | awk '{$1=$1;print}'"
+  register: swarm_status
+  changed_when: false
+  become: true
+
+- name: swarm status
+  debug:
+    msg: "swarm status is: {{swarm_status.stdout_lines}}"
+
+- name: init swarm
+  shell: "docker swarm init --advertise-addr=127.0.0.1:2377"
+  when: "'active' not in swarm_status.stdout_lines"
+  register: swarm_setup
