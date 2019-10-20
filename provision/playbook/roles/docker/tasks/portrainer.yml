@@ -17,6 +17,7 @@
       - /var/run/docker.sock:/var/run/docker.sock
     command: "-H unix:///var/run/docker.sock --admin-password '{{ admin_password_enc.stdout }}' --logo https://peregin-static.s3.amazonaws.com/logo100.png"
   register: portainer_docker
+  become: true
 
 - set_fact:
     portainer_is_running: "{{ portainer_docker.ansible_facts.docker_container.State.Running }}"

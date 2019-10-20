@@ -19,20 +19,20 @@
     dest: /etc/yum.repos.d/docker-{{docker_edition}}.repo
   become: yes
 
-- name: enable docker {{docker_edition}} repo
+- name: enable docker-{{docker_edition}} repo
   ini_file:
     dest: /etc/yum.repos.d/docker-{{docker_edition}}.repo
     section: 'docker-{{docker_edition}}-{{docker_channel}}'
     option: enabled
-    value: 0
+    value: 1
   become: yes
 
-- name: enable docker test repo
+- name: enable docker-{{docker_edition}} test repo
   ini_file:
     dest: /etc/yum.repos.d/docker-{{docker_edition}}.repo
     section: 'docker-{{docker_edition}}-test'
     option: enabled
-    value: 0
+    value: 1
   become: yes
 
 - name: install docker-{{docker_edition}}

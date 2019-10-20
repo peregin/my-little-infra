@@ -4,15 +4,16 @@
     state: present
   become: true
 
-- name: deploy reverse proxy setup
-  template:
-    src: reverse-proxy.conf.j2
-    dest: /etc/nginx/nginx.conf
-  become: true
-
 - name: start nginx
   service:
     name: nginx
     state: started
     enabled: true
   become: true
+
+- name: deploy reverse proxy setup
+  template:
+    src: reverse-proxy.conf.j2
+    dest: /etc/nginx/nginx.conf
+  become: true
+  notify: restart nginx
