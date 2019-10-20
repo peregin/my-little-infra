@@ -1,4 +1,9 @@
 ---
+
+- name: encrypt admin password
+  shell: "htpasswd -nb -B admin {{ lookup('env', 'ADMIN_PASSWORD') }} | cut -d ':' -f 2"
+  register: admin_password_enc
+
 - name: "deploy portainer to {{ inventory_hostname }}"
   docker_container:
     name: portainer
@@ -10,6 +15,7 @@
     published_ports: "9000:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    command: "-H unix:///var/run/docker.sock --admin-password '{{ admin_password_enc.stdout }}'"
   register: portainer_docker
 
 - set_fact:

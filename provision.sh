@@ -6,6 +6,11 @@ function printUsage() {
   echo $"Usage: $(basename "$0") <local|aws>"
 }
 
+if [ -z "$ADMIN_PASSWORD" ]; then
+  echo "ADMIN_PASSWORD environment variable must be set"
+  exit 1
+fi
+
 case "$ENVIRONMENT" in
   "local"|"aws")
     echo "provisioning environment[$ENVIRONMENT]"
