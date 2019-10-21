@@ -5,6 +5,9 @@ services:
     ports:
       - 2480:2480
       - 2424:2424
+    environment:
+      ORIENTDB_ROOT_PASSWORD: "{{ lookup('env', 'ADMIN_PASSWORD') }}"
+      ORIENTDB_NODE_NAME: velocorner
     deploy:
       restart_policy:
         condition: on-failure
