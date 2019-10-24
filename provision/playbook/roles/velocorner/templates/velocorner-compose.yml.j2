@@ -7,7 +7,7 @@ services:
       - 2424:2424
     environment:
       ORIENTDB_ROOT_PASSWORD: "{{ lookup('env', 'ADMIN_PASSWORD') }}"
-      ORIENTDB_NODE_NAME: velocorner
+      ORIENTDB_NODE_NAME: odb1
     deploy:
       restart_policy:
         condition: on-failure
