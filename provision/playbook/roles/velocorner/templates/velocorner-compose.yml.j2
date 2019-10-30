@@ -1,5 +1,6 @@
 version: "3.7"
 services:
+
   database:
     image: orientdb:3.0.24
     ports:
@@ -11,7 +12,16 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-        delay: 5s
+        delay: 20s
+    networks:
+      - backend
+
+  web-app:
+    image: peregin/velocorner.com:latest
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 20s
     networks:
       - backend
 
