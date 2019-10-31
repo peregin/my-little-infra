@@ -11,6 +11,20 @@ if [ -z "$STACK" ]; then
   exit 1
 fi
 
+if [ -z "$ADMIN_PASSWORD" ]; then
+  echo "ADMIN_PASSWORD environment variable must be set"
+  exit 1
+fi
+
+if [ -z "$APP_CONFIG_DIR" ]; then
+  echo "APP_CONFIG_DIR environment variable must be set"
+  exit 1
+fi
+if [ ! -d "$APP_CONFIG_DIR" ]; then
+  echo "[$APP_CONFIG_DIR] directory does not exists"
+  exit 1
+fi
+
 case "$ENVIRONMENT" in
   "local"|"aws")
     echo "deploying to environment[$ENVIRONMENT]"

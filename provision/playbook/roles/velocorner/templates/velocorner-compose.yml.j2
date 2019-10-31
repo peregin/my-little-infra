@@ -13,17 +13,22 @@ services:
       restart_policy:
         condition: on-failure
         delay: 20s
+        max_attempts: 3
     networks:
       - backend
 
   web-app:
     image: peregin/velocorner.com:latest
+    command: -Dconfig.file=/data-volume/config/web-app.conf
+    volumes:
+      - {{ velocorner_dir }}:/data-volume/
     ports:
       - 9000:9000
     deploy:
       restart_policy:
         condition: on-failure
         delay: 20s
+        max_attempts: 3
     networks:
       - backend
 

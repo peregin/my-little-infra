@@ -12,7 +12,7 @@
     detach: true
     recreate: false
     restart_policy: always
-    published_ports: "9000:9000"
+    published_ports: "7000:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: "-H unix:///var/run/docker.sock --admin-password '{{ admin_password_enc.stdout }}' --logo https://peregin-static.s3.amazonaws.com/logo100.png"
@@ -23,7 +23,7 @@
     portainer_is_running: "{{ portainer_docker.ansible_facts.docker_container.State.Running }}"
 
 - set_fact:
-    portainer_endpoint: "http://{{ portainer_docker.ansible_facts.docker_container.NetworkSettings.IPAddress }}:9000/api"
+    portainer_endpoint: "http://{{ portainer_docker.ansible_facts.docker_container.NetworkSettings.IPAddress }}:7000/api"
 
 - name: print portainer endpoint
   debug:

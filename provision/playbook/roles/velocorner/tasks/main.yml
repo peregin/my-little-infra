@@ -1,18 +1,34 @@
 ---
-- name: Ensure plugin directory exists
+- name: ensure data directory exists
   file:
-    path: "/opt/velocorner"
+    path: "{{ velocorner_dir }}"
     owner: "{{ ansible_user }}"
     mode: 0775
     state: directory
   become: true
 
+- name: ensure config directory exists
+  file:
+    path: "{{ velocorner_dir }}/config"
+    owner: "{{ ansible_user }}"
+    mode: 0775
+    state: directory
+  become: true
+
+- name: copy web-app {{ web_app_config_file }} configuration file
+  copy:
+    src: "{{ lookup('env', 'APP_CONFIG_DIR') }}/{{ web_app_config_file }}"
+    dest: "{{ velocorner_dir }}/config/web-app.conf"
+    owner: "{{ ansible_user }}"
+    mode: 0775
+  become: true
+
 - name: copy docker compose template
   template:
     src: velocorner-compose.yml.j2
-    dest: /opt/velocorner/velocorner-compose.yml
+    dest: "{{ velocorner_dir }}/velocorner-compose.yml"
   become: true
 
 - name: deploy velocorner stack
-  shell: "docker stack deploy --prune --compose-file /opt/velocorner/velocorner-compose.yml velocorner"
+  shell: "docker stack deploy --prune --compose-file {{ velocorner_dir }}/velocorner-compose.yml velocorner"
   become: true
