@@ -5,6 +5,7 @@ services:
     image: orientdb:3.0.24
     volumes:
       - {{ velocorner_dir }}/orientdb/backup:/orientdb/backup/
+      - {{ velocorner_dir }}/orientdb/databases:/orientdb/databases/
     ports:
       - 2480:2480
       - 2424:2424
@@ -21,9 +22,9 @@ services:
 
   web-app:
     image: peregin/velocorner.com:latest
-    command: -Dconfig.file=/data-volume/config/web-app.conf {{ web_app_parameter }}
+    command: -Dconfig.file=/web-app/config/web-app.conf {{ web_app_parameter }}
     volumes:
-      - {{ velocorner_dir }}:/data-volume/
+      - {{ velocorner_dir }}/web-app:/web-app/
     ports:
       - 9000:9000
     deploy:

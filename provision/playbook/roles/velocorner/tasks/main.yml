@@ -8,14 +8,16 @@
   with_items:
     - "{{ velocorner_dir }}"
     - "{{ velocorner_dir }}/config"
+    - "{{ velocorner_dir }}/web-app/config"
     - "{{ velocorner_dir }}/orientdb"
     - "{{ velocorner_dir }}/orientdb/backup"
+    - "{{ velocorner_dir }}/orientdb/databases"
   become: true
 
 - name: copy web-app {{ web_app_config_file }} configuration file
   copy:
     src: "{{ lookup('env', 'APP_CONFIG_DIR') }}/{{ web_app_config_file }}"
-    dest: "{{ velocorner_dir }}/config/web-app.conf"
+    dest: "{{ velocorner_dir }}/web-app/config/web-app.conf"
     owner: "{{ ansible_user }}"
     mode: 0775
   become: true
