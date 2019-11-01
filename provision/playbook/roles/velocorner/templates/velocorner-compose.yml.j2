@@ -19,7 +19,7 @@ services:
 
   web-app:
     image: peregin/velocorner.com:latest
-    command: -Dconfig.file=/data-volume/config/web-app.conf
+    command: -Dconfig.file=/data-volume/config/web-app.conf {{ web_app_parameter }}
     volumes:
       - {{ velocorner_dir }}:/data-volume/
     ports:
