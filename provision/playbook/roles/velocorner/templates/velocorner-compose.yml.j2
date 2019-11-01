@@ -3,6 +3,8 @@ services:
 
   database:
     image: orientdb:3.0.24
+    volumes:
+      - {{ velocorner_dir }}/orientdb/backup:/orientdb/backup/
     ports:
       - 2480:2480
       - 2424:2424

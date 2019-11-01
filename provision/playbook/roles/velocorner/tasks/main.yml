@@ -1,18 +1,15 @@
 ---
 - name: ensure data directory exists
   file:
-    path: "{{ velocorner_dir }}"
+    path: "{{ item }}"
     owner: "{{ ansible_user }}"
     mode: 0775
     state: directory
-  become: true
-
-- name: ensure config directory exists
-  file:
-    path: "{{ velocorner_dir }}/config"
-    owner: "{{ ansible_user }}"
-    mode: 0775
-    state: directory
+  with_items:
+    - "{{ velocorner_dir }}"
+    - "{{ velocorner_dir }}/config"
+    - "{{ velocorner_dir }}/orientdb"
+    - "{{ velocorner_dir }}/orientdb/backup"
   become: true
 
 - name: copy web-app {{ web_app_config_file }} configuration file
