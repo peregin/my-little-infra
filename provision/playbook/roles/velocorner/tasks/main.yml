@@ -28,6 +28,13 @@
     dest: "{{ velocorner_dir }}/velocorner-compose.yml"
   become: true
 
+- name: copy deployment shell script
+  template:
+    src: deploy.sh.j2
+    dest: "{{ velocorner_dir }}/deploy.sh"
+    mode: 0755
+  become: true
+
 - name: deploy velocorner stack
-  shell: "docker stack deploy --prune --compose-file {{ velocorner_dir }}/velocorner-compose.yml velocorner"
+  shell: "{{ velocorner_dir }}/deploy.sh"
   become: true
