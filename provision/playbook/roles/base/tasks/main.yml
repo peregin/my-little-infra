@@ -13,4 +13,5 @@
     - httpd-tools
     - python2-pip
     - vim
+    - wget
   become: true
