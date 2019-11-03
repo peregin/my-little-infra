@@ -12,6 +12,7 @@ services:
     environment:
       ORIENTDB_ROOT_PASSWORD: "{{ lookup('env', 'ADMIN_PASSWORD') }}"
       ORIENTDB_NODE_NAME: odb1
+      ORIENTDB_OPTS_MEMORY: "-Xmx1G"
     deploy:
       restart_policy:
         condition: on-failure

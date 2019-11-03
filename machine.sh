@@ -36,7 +36,14 @@ case "$ENVIRONMENT" in
     setupWithVagrant "$ENVIRONMENT" $COMMAND
     ;;
   "aws")
-    setupWithTerraform "$ENVIRONMENT" $COMMAND
+    case "$COMMAND" in
+      "ssh")
+        echo "TODO: ssh to EC2"
+        ;;
+      *)
+        setupWithTerraform "$ENVIRONMENT" $COMMAND
+        ;;
+    esac
     ;;
   *)
     printUsage
