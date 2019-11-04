@@ -55,11 +55,11 @@
     append: yes
   become: yes
 
-- name: enable deployer login
+- name: disable password login
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: '^PasswordAuthentication'
-    line: 'PasswordAuthentication yes'
+    line: 'PasswordAuthentication no'
   become: true
   notify:
     - restart sshd
