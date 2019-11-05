@@ -64,16 +64,6 @@
   notify:
     - restart sshd
 
-- name: create deployer account
-  user:
-    name: deployer
-    password: "{{ lookup('env', 'ADMIN_PASSWORD') | password_hash('sha512') }}"
-    groups: docker
-    state: present
-    append: yes
-    shell: "/bin/bash"
-  become: true
-
 - include_tasks: swarm.yml
 
 - include_tasks: portrainer.yml
