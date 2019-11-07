@@ -15,3 +15,28 @@
     - vim
     - wget
   become: true
+
+- name: setup LC_ALL environment variable
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^LC_ALL=.*'
+    line: "LC_ALL=en_US.UTF-8"
+  become: true
+
+- name: setup LC_CTYPE environment variable
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^LC_CTYPE=.*'
+    line: "LC_CTYPE=en_US.UTF-8"
+  become: true
+
+- name: disable systemslice
+  blockinfile:
+    path: /etc/rsyslog.d/ignore-systemd-session-slice.conf
+    create: yes
+    block: |
+      if $programname == "systemd" and ($msg contains "Starting Session" or $msg contains "Started Session" or $msg contains "session closed" or $msg contains "session opened" or $msg contains "Created slice" or $msg contains "Starting user-" or $msg contains "Starting User Slice of" or $msg contains "Startup" or $msg contains "Removed session" or $msg contains "New session" or $msg contains "Removed slice User Slice of" or $msg contains "Stopping User Slice of" or $msg contains "dwc_otg_handle_mode_mismatch_intr") then stop
+      if $programname == "systemd-logind" and ($msg contains "Starting Session" or $msg contains "Started Session" or $msg contains "session closed" or $msg contains "session opened" or $msg contains "Created slice" or $msg contains "Starting user-" or $msg contains "Starting User Slice of" or $msg contains "Removed session"  or $msg contains "New session" or $msg contains "Removed slice User Slice of" or $msg contains "Stopping User Slice of") then stop
+  become: true
+  notify:
+    - restart rsyslog
