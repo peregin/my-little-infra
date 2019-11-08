@@ -36,5 +36,19 @@ services:
     networks:
       - backend
 
+  web-front:
+    image: peregin/web-front:latest
+    volumes:
+      - {{ velocorner_dir }}/web-app:/web-app/
+    ports:
+      - 3000:3000
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 20s
+        max_attempts: 3
+    networks:
+      - backend
+
 networks:
   backend:

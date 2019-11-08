@@ -29,6 +29,10 @@ http {
     proxy_read_timeout            300;
     send_timeout                  300;
 
+    upstream web-front {
+      server 127.0.0.1:3000 max_fails=0;
+    }
+
     upstream web-app {
       server 127.0.0.1:9000 max_fails=0;
     }
@@ -55,6 +59,17 @@ http {
             proxy_pass            http://web-app;
         }
     }
+
+    server {
+            listen 80;
+            server_name dev.velocorner.com;
+            location / {
+                proxy_set_header   X-Real-IP $remote_addr;
+                proxy_set_header   Host $http_host;
+                proxy_set_header   X-Forwarded-For $remote_addr;
+                proxy_pass         http://web-front;
+            }
+        }
 
     server {
         listen 80;
