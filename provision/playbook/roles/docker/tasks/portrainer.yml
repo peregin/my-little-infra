@@ -11,6 +11,7 @@
     state: started
     detach: true
     recreate: false
+    pull: yes
     restart_policy: always
     published_ports: "7000:9000"
     volumes:
