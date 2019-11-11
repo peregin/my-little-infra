@@ -1,3 +1,6 @@
+[![Docker Pulls](https://img.shields.io/docker/pulls/peregin/velocorner.com)](https://hub.docker.com/r/peregin/velocorner.com)
+[![Docker Pulls](https://img.shields.io/docker/pulls/peregin/web-front)](https://hub.docker.com/r/peregin/web-front)
+
 # Web Infrastructure
 
 The repository provides the code to create local (VirtualBox) and remote (AWS) infrastructure for
