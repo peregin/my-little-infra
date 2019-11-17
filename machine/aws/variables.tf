@@ -15,3 +15,9 @@ variable "server_port" {
   type        = number
   default     = 80
 }
+
+variable "secure_server_port" {
+  description = "The port the server will use for HTTPS requests"
+  type        = number
+  default     = 443
+}

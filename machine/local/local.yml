@@ -3,5 +3,5 @@
   box-image: "centos/7"
   # appears also in the ansible/inventory/local/hosts
   ip: "192.168.0.11"
-  reserved_ports: [80,8001]
+  reserved_ports: [80,443,7000,9000]
   max-ram: 1000

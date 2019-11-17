@@ -45,6 +45,14 @@ resource "aws_security_group" "instance" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # Inbound HTTPS from anywhere
+  ingress {
+    from_port   = var.secure_server_port
+    to_port     = var.secure_server_port
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   # Inbound SSH from anywhere
   ingress {
     from_port = 22
