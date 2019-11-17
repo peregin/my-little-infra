@@ -1,3 +1,4 @@
+[![Issues](https://img.shields.io/github/issues/peregin/my-little-infra.svg)](https://github.com/peregin/my-little-infra/issues)
 [![Docker Pulls](https://img.shields.io/docker/pulls/peregin/velocorner.com)](https://hub.docker.com/r/peregin/velocorner.com)
 [![Docker Pulls](https://img.shields.io/docker/pulls/peregin/web-front)](https://hub.docker.com/r/peregin/web-front)
 
