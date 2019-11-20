@@ -14,6 +14,11 @@ services:
       ORIENTDB_NODE_NAME: odb1
       ORIENTDB_OPTS_MEMORY: "-Xmx1G"
     deploy:
+      resources:
+        limits:
+          memory: 700M
+        reservations:
+          memory: 200M
       restart_policy:
         condition: on-failure
         delay: 20s
@@ -29,6 +34,11 @@ services:
     ports:
       - 9000:9000
     deploy:
+      resources:
+        limits:
+          memory: 500M
+        reservations:
+          memory: 200M
       restart_policy:
         condition: on-failure
         delay: 20s
@@ -43,6 +53,11 @@ services:
     ports:
       - 3000:3000
     deploy:
+      resources:
+        limits:
+          memory: 500M
+        reservations:
+          memory: 200M
       restart_policy:
         condition: on-failure
         delay: 20s
