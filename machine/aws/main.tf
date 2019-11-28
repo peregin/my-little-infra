@@ -22,7 +22,7 @@ resource "aws_instance" "web" {
   # https://aws.amazon.com/marketplace/pp/B00O7WM7QW
   # version 1901_01
   ami = "ami-d5bf2caa"
-  instance_type = "t2.micro"
+  instance_type = "t2.small"
   key_name      = "aws-peregin"
   tags = {
     Name = "web-infra"
