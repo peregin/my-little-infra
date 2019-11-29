@@ -12,6 +12,7 @@
     - yum-utils
     - httpd-tools
     - python2-pip
+    - libsemanage-python
     - vim
     - wget
   become: true
