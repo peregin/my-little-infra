@@ -1,0 +1,14 @@
+Host to Virtual
+===============
+scp -o StrictHostKeyChecking=no -i machine/local/.vagrant/machines/velocorner.local/virtualbox/private_key  ~/Downloads/velo/velocorner/backup/velocorner-2019-11-30.gz vagrant@192.168.0.11:
+
+Virtual to Container
+====================
+docker exec -it 1e98203cfbf3 /bin/bash
+docker cp velocorner-2019-11-30.gz 1e98203cfbf3:/
+
+OrientDB
+========
+connect remote:localhost/velocorner <user> <secret>
+import database /velocorner-2019-11-30.gz -preserveClusterIDs=true
+
