@@ -2,7 +2,5 @@
 - hosts: appserver
   gather_facts: no
   roles:
-    - base
-    - nginx
-    - docker
+    - k8s
 
