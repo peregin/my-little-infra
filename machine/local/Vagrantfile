@@ -35,7 +35,8 @@ Vagrant.configure(vagrantFileApiVersion) do |config|
         else
           vb.memory = setup['max-ram']
         end
-        vb.cpus = 1
+        # AWS T2.small has 1 only, local is set to 2 to experiment with k8s
+        vb.cpus = 2
       end
     end # config.vm.define
   end # topology.each

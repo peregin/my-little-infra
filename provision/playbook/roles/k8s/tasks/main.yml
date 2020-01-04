@@ -13,16 +13,25 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - kubelet
-    - kubeadm
     - kubectl
   become: true
 
-- name: start kubelet
-  service:
-    name: kubelet
-    enabled: yes
-    state: started
+- name: install minikube - one node deployment
+  shell: |
+    curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    install minikube-linux-amd64 /usr/local/bin/minikube
+  become: true
+
+- name: minikube version
+  shell: minikube version
+  register: minikube_version
+
+- name: print minikube version
+  debug:
+    var: minikube_version.stdout_lines
+
+- name: start minikube
+  shell: /usr/local/bin/minikube start --vm-driver={{ minikube_driver }}
   become: true
 
 

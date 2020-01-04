@@ -3,13 +3,16 @@
 ENVIRONMENT=$(echo "$1" | awk '{print tolower($0)}')
 
 function printUsage() {
-  echo $"Usage: $(basename "$0") <local|aws>"
+  echo $"Usage: $(basename "$0") <local|aws> [site]"
 }
 
 if [ -z "$ADMIN_PASSWORD" ]; then
   echo "ADMIN_PASSWORD environment variable must be set"
   exit 1
 fi
+
+PLAYBOOK=${2:-site}
+echo "playbook is $PLAYBOOK.yml"
 
 case "$ENVIRONMENT" in
   "local"|"aws")
@@ -20,7 +23,7 @@ case "$ENVIRONMENT" in
       echo "connecting to $AWS_PUBLIC_IP"
       cd ../..
     fi
-    ansible-playbook -i provision/inventory/"$ENVIRONMENT" provision/playbook/site.yml
+    ansible-playbook -i provision/inventory/"$ENVIRONMENT" provision/playbook/"$PLAYBOOK".yml
     ;;
   *)
     printUsage
