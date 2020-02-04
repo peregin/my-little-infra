@@ -2,7 +2,7 @@ version: "3.7"
 services:
 
   database:
-    image: orientdb:3.0.24
+    image: orientdb:3.0.26
     volumes:
       - {{ velocorner_dir }}/orientdb/backup:/orientdb/backup/
       - {{ velocorner_dir }}/orientdb/databases:/orientdb/databases/
