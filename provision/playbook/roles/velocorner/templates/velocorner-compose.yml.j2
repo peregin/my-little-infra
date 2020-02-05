@@ -64,6 +64,8 @@ services:
         condition: on-failure
         delay: 20s
         max_attempts: 3
+    environment:
+      - NODE_ENV=development
     networks:
       - backend
     depends_on:
