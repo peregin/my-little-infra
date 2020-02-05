@@ -45,6 +45,8 @@ services:
         max_attempts: 3
     networks:
       - backend
+    depends_on:
+      - database
 
   web-front:
     image: peregin/web-front:latest
@@ -64,6 +66,8 @@ services:
         max_attempts: 3
     networks:
       - backend
+    depends_on:
+      - database
 
 networks:
   backend:
