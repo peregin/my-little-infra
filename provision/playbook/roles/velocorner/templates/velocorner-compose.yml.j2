@@ -50,8 +50,6 @@ services:
 
   web-front:
     image: peregin/web-front:latest
-    volumes:
-      - {{ velocorner_dir }}/web-app:/web-app/
     ports:
       - 3000:3000
     deploy:
