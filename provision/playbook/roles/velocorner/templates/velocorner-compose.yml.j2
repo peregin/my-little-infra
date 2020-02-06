@@ -52,6 +52,9 @@ services:
     image: peregin/web-front:latest
     ports:
       - 3000:3000
+    environment:
+      - API_HOST=http://web-app:9000
+      - NODE_ENV=development
     deploy:
       resources:
         limits:
@@ -62,8 +65,6 @@ services:
         condition: on-failure
         delay: 20s
         max_attempts: 3
-    environment:
-      - NODE_ENV=development
     networks:
       - backend
     depends_on:
