@@ -33,7 +33,7 @@ function setupWithTerraform() {
 
 case "$ENVIRONMENT" in
   "local")
-    setupWithVagrant "$ENVIRONMENT" $COMMAND
+    setupWithVagrant "$ENVIRONMENT" $COMMAND $3 $4 $5
     ;;
   "aws")
     case "$COMMAND" in
