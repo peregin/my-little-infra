@@ -44,5 +44,10 @@ Deploys the application stack mainly running in docker containers.
 deploy.sh <env> <stack>
 ```
 
+## Import local database in OrientDB
+```shell script
+importdb.sh <pwd>
+```
+
 
 
