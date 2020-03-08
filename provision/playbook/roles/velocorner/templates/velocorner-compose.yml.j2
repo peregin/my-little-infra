@@ -21,7 +21,7 @@ services:
           memory: 200M
       restart_policy:
         condition: on-failure
-        delay: 20s
+        delay: 5s
         max_attempts: 3
     networks:
       - backend
@@ -41,7 +41,7 @@ services:
           memory: 200M
       restart_policy:
         condition: on-failure
-        delay: 20s
+        delay: 5s
         max_attempts: 3
     networks:
       - backend
@@ -63,7 +63,7 @@ services:
           memory: 200M
       restart_policy:
         condition: on-failure
-        delay: 20s
+        delay: 5s
         max_attempts: 3
     networks:
       - backend
