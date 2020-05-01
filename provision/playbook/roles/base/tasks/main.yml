@@ -49,3 +49,11 @@
     owner: "{{ ansible_user }}"
     mode: 0777
   become: true
+
+- name: setup con job for centos cleanup for every morning 8am"
+  cron:
+    name: "clean-centos"
+    minute: "0"
+    hour: "8"
+    job: "/home/{{ ansible_user }}/clean-centos.sh"
+  become: true
