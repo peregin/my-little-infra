@@ -41,3 +41,11 @@
   become: true
   notify:
     - restart rsyslog
+
+- name: copy clean-centos shell script to home directory
+  copy:
+    src: "clean-centos.sh"
+    dest: "/home/{{ ansible_user }}/clean-centos.sh"
+    owner: "{{ ansible_user }}"
+    mode: 0777
+  become: true
