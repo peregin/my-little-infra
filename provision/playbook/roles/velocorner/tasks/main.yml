@@ -12,6 +12,9 @@
     - "{{ velocorner_dir }}/orientdb"
     - "{{ velocorner_dir }}/orientdb/backup"
     - "{{ velocorner_dir }}/orientdb/databases"
+    - "{{ velocorner_dir }}/psql"
+    - "{{ velocorner_dir }}/psql/data"
+    - "{{ velocorner_dir }}/psql/backup"
   become: true
 
 - name: copy web-app {{ web_app_config_file }} configuration file
