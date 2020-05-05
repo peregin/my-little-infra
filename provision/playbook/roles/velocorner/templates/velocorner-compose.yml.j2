@@ -1,31 +1,6 @@
 version: "3.7"
 services:
 
-  orient_database:
-    image: orientdb:3.0.24
-    volumes:
-      - {{ velocorner_dir }}/orientdb/backup:/orientdb/backup/
-      - {{ velocorner_dir }}/orientdb/databases:/orientdb/databases/
-    ports:
-      - 2480:2480
-      - 2424:2424
-    environment:
-      ORIENTDB_ROOT_PASSWORD: "{{ lookup('env', 'ADMIN_PASSWORD') }}"
-      ORIENTDB_NODE_NAME: odb1
-      ORIENTDB_OPTS_MEMORY: "-Xmx1G"
-    deploy:
-      resources:
-        limits:
-          memory: 700M
-        reservations:
-          memory: 200M
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-    networks:
-      - backend
-
   psql_database:
     image: postgres:12.2-alpine
     volumes:
