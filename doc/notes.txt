@@ -7,8 +7,11 @@ Virtual to Container
 docker exec -it 1e98203cfbf3 /bin/bash
 docker cp velocorner-2019-11-30.gz 1e98203cfbf3:/
 
-OrientDB
-========
-connect remote:localhost/velocorner <user> <secret>
-import database /velocorner-2019-11-30.gz -preserveClusterIDs=true
+Backup Psql
+===========
+DB_ID=$(docker ps -aqf "name=velocorner_psql_database")
+DATETIME="`date '+%Y%m%d%H%M'`"
+docker exec -i d6064415c063 pg_dump -U velocorner -d velocorner -c | gzip > psql-${DATETIME}.sql.gz
+
+
 

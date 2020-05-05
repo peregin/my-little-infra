@@ -35,6 +35,22 @@
     mode: 0755
   become: true
 
+- name: copy database backup shell script
+  template:
+    src: backup-psql.sh.j2
+    dest: "{{ velocorner_dir }}/backup-psql.sh"
+    mode: 0755
+  become: true
+
+- name: setup cron job for database backup every thursday 10am"
+  cron:
+    name: "backup-psql"
+    minute: "0"
+    hour: "10"
+    weekday: "4"
+    job: "{{ velocorner_dir }}/backup-psql.sh"
+  become: true
+
 - name: deploy velocorner stack
   shell: "{{ velocorner_dir }}/deploy.sh"
   become: true

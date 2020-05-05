@@ -50,7 +50,7 @@
     mode: 0777
   become: true
 
-- name: setup con job for centos cleanup for every morning 8am"
+- name: setup cron job for centos cleanup for every morning 8am"
   cron:
     name: "clean-centos"
     minute: "0"
