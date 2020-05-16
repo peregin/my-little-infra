@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 DB_ID=$(docker ps -aqf "name=velocorner_psql_database")
 DATETIME="`date '+%Y%m%d%H%M'`"
-docker exec -i d6064415c063 pg_dump -U velocorner -d velocorner -c | gzip > {{ velocorner_dir }}/psql/backup/psql-${DATETIME}.sql.gz
+docker exec -i ${DB_ID} pg_dump -U velocorner -d velocorner -c | gzip > {{ velocorner_dir }}/psql/backup/psql-${DATETIME}.sql.gz
