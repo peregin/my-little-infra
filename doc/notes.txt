@@ -13,6 +13,11 @@ DB_ID=$(docker ps -aqf "name=velocorner_psql_database")
 DATETIME="`date '+%Y%m%d%H%M'`"
 docker exec -i ${DB_ID} pg_dump -U velocorner -d velocorner -c | gzip > psql-${DATETIME}.sql.gz
 
+Import Psql
+===========
+docker cp psql.export.gz ${DB_ID}:psql.export.gz
+gunzip < psql.export.gz | psql -U velocorner -d velocorner
+
 # IP
 AHost to IP address
 MX Record velocorner.com
