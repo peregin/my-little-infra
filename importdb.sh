@@ -11,7 +11,7 @@ if [ -z "$DB_PWD" ] || [ -z "$DB_FILE" ]; then
   exit 1
 fi
 
-echo "Database export from $1"
+echo "Database import from $1"
 
 # from host to virtualbox vm
 scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i machine/local/.vagrant/machines/velocorner.local/virtualbox/private_key $DB_FILE vagrant@192.168.0.11:velocorner.export.gz
