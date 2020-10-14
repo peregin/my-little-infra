@@ -7,7 +7,6 @@
     state: directory
   with_items:
     - "{{ velocorner_dir }}"
-    - "{{ velocorner_dir }}/config"
     - "{{ velocorner_dir }}/web-app/config"
     - "{{ velocorner_dir }}/psql"
     - "{{ velocorner_dir }}/psql/data"
