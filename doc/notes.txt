@@ -24,5 +24,24 @@ MX Record velocorner.com
 CName www @
 CName dev @
 
+Certificate
+===========
+https://certbot.eff.org/lets-encrypt/centosrhel7-nginx
+
+sudo yum --enablerepo=cr update
+sudo yum install snapd
+sudo systemctl enable --now snapd.socket
+sudo ln -s /var/lib/snapd/snap /snap
+sudo yum remove certbot
+sudo snap install core; sudo snap refresh core
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+## !!! better to setuo the certificates manually , or try with:
+sudo certbot --nginx
+## !!! remove redirects from /etc/nginx/nginx.conf
+sudo systemctl restart nginx.service
+sudo certbot renew --dry-run
+
+
 
 
