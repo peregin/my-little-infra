@@ -36,7 +36,7 @@ sudo yum remove certbot
 sudo snap install core; sudo snap refresh core
 sudo snap install --classic certbot
 sudo ln -s /snap/bin/certbot /usr/bin/certbot
-## !!! better to setuo the certificates manually , or try with:
+## !!! better to setup the certificates manually, or try with:
 sudo certbot --nginx
 ## !!! remove redirects from /etc/nginx/nginx.conf
 sudo systemctl restart nginx.service

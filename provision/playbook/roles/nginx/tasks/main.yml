@@ -1,5 +1,11 @@
 ---
-- name: ensure data directory exists
+- name: install letsencrypt
+  yum:
+    name: letsencrypt
+    state: present
+  become: true
+
+- name: ensure acme directory exists
   file:
     path: "{{ item }}"
     owner: "{{ ansible_user }}"
@@ -10,7 +16,7 @@
     - "/opt/letsencrypt/.well-known/acme-challenge"
   become: true
 
-- name: Ansible create file with content example
+- name: create facme challenge file
   copy:
     dest: "/opt/letsencrypt/.well-known/acme-challenge/test.txt"
     content: |

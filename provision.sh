@@ -3,7 +3,7 @@
 ENVIRONMENT=$(echo "$1" | awk '{print tolower($0)}')
 
 function printUsage() {
-  echo $"Usage: $(basename "$0") <local|aws> [site]"
+  echo $"Usage: $(basename "$0") <local|aws> [playbook|site]"
 }
 
 if [ -z "$ADMIN_PASSWORD" ]; then

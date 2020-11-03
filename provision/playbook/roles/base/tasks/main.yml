@@ -6,15 +6,8 @@
 
 - name: install base packages
   yum:
-    name: "{{ item }}"
+    name: ['yum-utils', 'httpd-tools', 'python2-pip', 'libsemanage-python', 'vim', 'wget']
     state: present
-  with_items:
-    - yum-utils
-    - httpd-tools
-    - python2-pip
-    - libsemanage-python
-    - vim
-    - wget
   become: true
 
 - name: setup LC_ALL environment variable
