@@ -16,7 +16,7 @@
     - "/opt/letsencrypt/.well-known/acme-challenge"
   become: true
 
-- name: create facme challenge file
+- name: create acme challenge file
   copy:
     dest: "/opt/letsencrypt/.well-known/acme-challenge/test.txt"
     content: |

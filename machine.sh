@@ -12,7 +12,7 @@ if [ -z "$COMMAND" ]; then
 fi
 
 function printUsage() {
-  echo $"Usage: $(basename "$0") <local|aws> [command]"
+  echo $"Usage: $(basename "$0") <local|aws> [up|create|destroy|ssh]"
 }
 
 function setupWithVagrant() {

@@ -53,6 +53,9 @@ sudo snap remove certbot
 sudo yum remove snap
 sudo rm -rf /snap
 
+- remove portainer (have ce now)
+- remove letsencrypt
+
 
 
 
