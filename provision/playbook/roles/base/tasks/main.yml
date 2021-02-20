@@ -6,7 +6,7 @@
 
 - name: install base packages
   yum:
-    name: ['yum-utils', 'httpd-tools', 'python2-pip', 'libsemanage-python', 'vim', 'wget']
+    name: ['yum-utils', 'httpd-tools', 'python3-pip', 'libsemanage-python', 'vim', 'wget']
     state: present
   become: true
 

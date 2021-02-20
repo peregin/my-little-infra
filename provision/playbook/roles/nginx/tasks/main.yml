@@ -1,8 +1,8 @@
 ---
-- name: install letsencrypt acme client
-  pip:
-    name: acme-nginx
-  become: true
+#- name: install letsencrypt acme client
+#  pip:
+#    name: acme-nginx
+#    executable: pip3
 
 - name: ensure acme directory exists
   file:
