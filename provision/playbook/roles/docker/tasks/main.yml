@@ -21,7 +21,7 @@
     dest: /etc/yum.repos.d/docker-{{docker_edition}}.repo
     section: 'docker-{{docker_edition}}-{{docker_channel}}'
     option: enabled
-    value: 1
+    value: '1'
   become: yes
 
 - name: enable docker-{{docker_edition}} test repo
@@ -29,7 +29,7 @@
     dest: /etc/yum.repos.d/docker-{{docker_edition}}.repo
     section: 'docker-{{docker_edition}}-test'
     option: enabled
-    value: 1
+    value: '1'
   become: yes
 
 - name: install docker-{{docker_edition}}

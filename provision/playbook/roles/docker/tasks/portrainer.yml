@@ -14,6 +14,7 @@
     pull: yes
     restart_policy: always
     published_ports: "7000:9000"
+    container_default_behavior: compatibility
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: "-H unix:///var/run/docker.sock --admin-password '{{ admin_password_enc.stdout }}' --logo https://peregin-static.s3.amazonaws.com/logo100.png"
