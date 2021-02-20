@@ -29,24 +29,19 @@ Creates and and destroys the infrastructure (looked as abstractions over machine
 machine.sh <env> [command]
 ```
 
-## Provision the Infrastructure
+## Provisioning the Infrastructure
 Installs and configures the infrastructure.
 ```bash
 # env local|aws
 provision.sh <env>
 ```
 
-## Application Stack Deployment
-Deploys the application stack mainly running in docker containers.
+## Provisioning Application Stack
+Deploys the application stack, mainly running in docker containers.
 ```bash
 # env local|aws
 # stack velocorner|any-app-stack
-deploy.sh <env> <stack>
-```
-
-## Import local database in OrientDB
-```shell script
-importdb.sh <pwd>
+provision.sh <env> <stack>
 ```
 
 
