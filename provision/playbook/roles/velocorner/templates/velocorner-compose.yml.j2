@@ -26,6 +26,8 @@ services:
       - {{ velocorner_dir }}/web-app:/web-app/
     ports:
       - 9000:9000
+    environment:
+      HOST_OS_NAME: "{{ ansible_distribution }}"
     deploy:
       resources:
         limits:

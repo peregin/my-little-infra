@@ -1,6 +1,6 @@
 ---
 - hosts: appserver
-  gather_facts: no
+  gather_facts: yes
   roles:
     - velocorner
 
