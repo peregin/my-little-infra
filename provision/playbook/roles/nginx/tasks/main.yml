@@ -1,8 +1,4 @@
 ---
-#- name: install letsencrypt acme client
-#  pip:
-#    name: acme-nginx
-#    executable: pip3
 
 - name: ensure acme directory exists
   file:
@@ -12,6 +8,7 @@
     state: directory
   with_items:
     - "/opt/letsencrypt"
+    - "/opt/letsencrypt/.well-known/acme-challenge"
   become: true
 
 - name: local inventory check
