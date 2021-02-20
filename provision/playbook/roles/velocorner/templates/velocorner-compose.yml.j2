@@ -27,7 +27,7 @@ services:
     ports:
       - 9000:9000
     environment:
-      HOST_OS_NAME: "{{ ansible_distribution }}"
+      HOST_OS_VERSION: "{{ ansible_distribution }} {{ ansible_distribution_version }}"
     deploy:
       resources:
         limits:
