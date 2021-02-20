@@ -1,3 +1,7 @@
+Machine
+=======
+CentOS Linux release 7.8.2003 (Core)
+
 Host to Virtual
 ===============
 scp -o StrictHostKeyChecking=no -i machine/local/.vagrant/machines/velocorner.local/virtualbox/private_key  ~/Downloads/velo/velocorner/backup/velocorner-2019-11-30.gz vagrant@192.168.0.11:
@@ -26,8 +30,10 @@ CName dev @
 
 Certificate
 ===========
-https://certbot.eff.org/lets-encrypt/centosrhel7-nginx
 
+Snap
+----
+https://certbot.eff.org/lets-encrypt/centosrhel7-nginx
 sudo yum --enablerepo=cr update
 sudo yum install snapd
 sudo systemctl enable --now snapd.socket
@@ -41,6 +47,12 @@ sudo certbot --nginx
 ## !!! remove redirects from /etc/nginx/nginx.conf
 sudo systemctl restart nginx.service
 sudo certbot renew --dry-run
+-- remove it
+sudo rm /usr/bin/certbot
+sudo snap remove certbot
+sudo yum remove snap
+sudo rm -rf /snap
+
 
 
 
