@@ -1,8 +1,7 @@
 ---
-- name: install letsencrypt
-  yum:
-    name: letsencrypt
-    state: present
+- name: install letsencrypt acme client
+  pip:
+    name: acme-nginx
   become: true
 
 - name: ensure acme directory exists
@@ -13,15 +12,17 @@
     state: directory
   with_items:
     - "/opt/letsencrypt"
-    - "/opt/letsencrypt/.well-known/acme-challenge"
   become: true
 
-- name: create acme challenge file
-  copy:
-    dest: "/opt/letsencrypt/.well-known/acme-challenge/test.txt"
-    content: |
-      test
-  become: true
+- name: local inventory check
+  debug:
+    msg: inventory is {{ inventory_hostname }}
+  when: "'velocorner.local' in inventory_hostname"
+
+- name: aws inventory check
+  debug:
+    msg: inventory is {{ inventory_hostname }}
+  when: "'velocorner.com' in inventory_hostname"
 
 - name: install nginx
   yum:

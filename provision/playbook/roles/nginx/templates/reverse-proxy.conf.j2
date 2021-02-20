@@ -60,15 +60,6 @@ http {
         listen 80;
         server_name velocorner.com www.velocorner.com peregin.com www.peregin.com velocorner.local;
 
-        location ~ /\.well-known/acme-challenge/ {
-            # no HTTP authentication
-            allow all;
-            default_type "text/plain";
-            root /opt/letsencrypt;
-            try_files $uri $uri/ =404;
-            break;
-        }
-
         location / {
             proxy_set_header      X-Real-IP $remote_addr;
             proxy_set_header      Host $http_host;
