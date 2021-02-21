@@ -53,8 +53,14 @@ sudo snap remove certbot
 sudo yum remove snap
 sudo rm -rf /snap
 
-- remove portainer (have ce now)
-- remove letsencrypt
+Pip
+===
+use explicit version 3
+- name: install pip dependencies
+  pip:
+    name: docker-py
+    executable: pip3
+  become: true
 
 
 

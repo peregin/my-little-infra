@@ -8,7 +8,6 @@
 - name: install pip dependencies
   pip:
     name: docker-py
-    executable: pip3
   become: true
 
 - name: add docker-{{docker_edition}} repo
