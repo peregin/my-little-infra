@@ -10,10 +10,8 @@
 
 - name: install kubernetes dependencies
   yum:
-    name: "{{ item }}"
+    name: ['kubectl']
     state: present
-  with_items:
-    - kubectl
   become: true
 
 - name: install minikube - one node deployment

@@ -11,9 +11,19 @@
     - "/opt/letsencrypt/.well-known/acme-challenge"
   become: true
 
-- name: local inventory check
-  debug:
-    msg: inventory is {{ inventory_hostname }}
+- name: copy local certificate shell script
+  copy:
+    src: "local-certificate.sh"
+    dest: "/opt/letsencrypt/local-certificate.sh"
+    owner: "{{ ansible_user }}"
+    mode: 0777
+  become: true
+
+- name: create local certificate
+  command: sh /opt/letsencrypt/local-certificate.sh
+  args:
+    creates: "/opt/letsencrypt/localhost.crt"
+  ignore_errors: True
   when: "'velocorner.local' in inventory_hostname"
 
 - name: aws inventory check
