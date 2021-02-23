@@ -53,14 +53,6 @@ sudo snap remove certbot
 sudo yum remove snap
 sudo rm -rf /snap
 
-Pip
-===
-use explicit version 3
-- name: install pip dependencies
-  pip:
-    name: docker-py
-    executable: pip3
-  become: true
 
 
 

@@ -35,7 +35,7 @@
   args:
     creates: "/opt/letsencrypt/localhost.crt"
   ignore_errors: True
-  when: "'velocorner.local' in inventory_hostname"
+#  when: "'velocorner.local' in inventory_hostname"
 
 - name: aws inventory check
   debug:
