@@ -22,20 +22,16 @@
     content: |
       welcome
 
-- name: copy local certificate shell script
+- name: copy certificate scripts
   copy:
-    src: "local-certificate.sh"
-    dest: "/opt/letsencrypt/local-certificate.sh"
+    src: '{{item}}'
+    dest: "/opt/letsencrypt"
     owner: "{{ ansible_user }}"
     mode: 0777
-  become: true
-
-- name: copy aws certificate shell script
-  copy:
-    src: "aws-certificate.sh"
-    dest: "/opt/letsencrypt/aws-certificate.sh"
-    owner: "{{ ansible_user }}"
-    mode: 0777
+  loop:
+    - local-certificate.sh
+    - aws-certificate.sh
+    - aws-certificate-renew.sh
   become: true
 
 - name: create local certificate
@@ -50,6 +46,17 @@
   shell: /opt/letsencrypt/aws-certificate.sh
   args:
     creates: "/etc/letsencrypt/live/velocorner.com/fullchain.pem"
+  when: "'velocorner.com' in inventory_hostname"
+  become: true
+
+# Setup Let's Encrypt auto-renew feature. The cron job will run every Monday at 11:00am.
+- name: Lets Encrypt auto renew.
+  cron: name="letsencrypt-auto renew"
+    hour=11
+    minute=0
+    weekday=1
+    job="/opt/letsencrypt/aws-certificate-renew.sh"
+    state=present
   when: "'velocorner.com' in inventory_hostname"
   become: true
 

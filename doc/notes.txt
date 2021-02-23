@@ -35,6 +35,7 @@ Certificate
 sudo certbot -m velocorner.com@gmail.com -d velocorner.com -d www.velocorner.com --webroot -w /opt/letsencrypt --dry-run --test-cert certonly
 sudo certbot -m velocorner.com@gmail.com -d velocorner.com -d www.velocorner.com --webroot -w /opt/letsencrypt certonly
 sudo certbot renew
+certbot renew --pre-hook "systemctl stop nginx" --post-hook "systemctl start nginx"
 https://www.ssllabs.com/ssltest/analyze.html?d=www.velocorner.com&latest
 
 
