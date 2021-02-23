@@ -4,3 +4,5 @@ https
 - wss
 - strava redirect config to https
 - all http should be redirected to https in nginx
+- update references to site (ad, profiles, etc)
+- run Lighthouse
