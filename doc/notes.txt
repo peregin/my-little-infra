@@ -22,7 +22,8 @@ Import Psql
 docker cp psql.export.gz ${DB_ID}:psql.export.gz
 gunzip < psql.export.gz | psql -U velocorner -d velocorner
 
-# IP
+IP
+==
 AHost to IP address
 MX Record velocorner.com
 CName www @
@@ -31,27 +32,7 @@ CName dev @
 Certificate
 ===========
 
-Snap
-----
-https://certbot.eff.org/lets-encrypt/centosrhel7-nginx
-sudo yum --enablerepo=cr update
-sudo yum install snapd
-sudo systemctl enable --now snapd.socket
-sudo ln -s /var/lib/snapd/snap /snap
-sudo yum remove certbot
-sudo snap install core; sudo snap refresh core
-sudo snap install --classic certbot
-sudo ln -s /snap/bin/certbot /usr/bin/certbot
-## !!! better to setup the certificates manually, or try with:
-sudo certbot --nginx
-## !!! remove redirects from /etc/nginx/nginx.conf
-sudo systemctl restart nginx.service
-sudo certbot renew --dry-run
--- remove it
-sudo rm /usr/bin/certbot
-sudo snap remove certbot
-sudo yum remove snap
-sudo rm -rf /snap
+sudo certbot -m velocorner.com@gmail.com -d velocorner.com -d www.velocorner.com --webroot -w /opt/letsencrypt --dry-run --test-cert certonly
 
 
 

@@ -20,7 +20,7 @@
   copy:
     dest: "/opt/letsencrypt/.well-known/acme-challenge/test.txt"
     content: |
-      test
+      welcome
 
 - name: copy local certificate shell script
   copy:
