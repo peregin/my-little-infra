@@ -20,7 +20,7 @@
   become: true
 
 - name: create local certificate
-  command: sh /opt/letsencrypt/local-certificate.sh
+  shell: /opt/letsencrypt/local-certificate.sh
   args:
     creates: "/opt/letsencrypt/localhost.crt"
   ignore_errors: True
