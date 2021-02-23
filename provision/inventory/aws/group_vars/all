@@ -3,3 +3,5 @@ ansible_host_key_checking: false
 web_app_config_file: docker_prod.conf
 web_app_parameter: -Dlog.mode=papertrail
 minikube_driver: none
+ssl_key: /opt/letsencrypt/velocorner.key
+ssl_crt: /opt/letsencrypt/velocorner.crt

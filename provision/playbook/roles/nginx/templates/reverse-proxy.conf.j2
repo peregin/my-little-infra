@@ -45,16 +45,21 @@ http {
       server 127.0.0.1:2480 max_fails=0;
     }
 
-#    server {
-#      listen 443 ssl;
-#      server_name velocorner.com www.velocorner.com velocorner.local;
-#      location ~ /.well-known/acme-challenge/ {
-#        allow all;
-#      }
+    server {
+      listen 443 ssl;
+      server_name velocorner.com www.velocorner.com velocorner.local localhost;
+
+      ssl_certificate {{ ssl_crt }};
+      ssl_certificate_key {{ ssl_key }};
+
+      location ~ /.well-known/acme-challenge/ {
+        root /opt/letsencrypt;
+        allow all;
+      }
 #      location / {
 #        return 301 http://$host$request_uri;
 #      }
-#    }
+    }
 
     server {
         listen 80;

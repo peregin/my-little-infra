@@ -1,4 +1,9 @@
 ---
+- name: install certbot
+  yum:
+    name: certbot
+    state: present
+  become: true
 
 - name: ensure acme directory exists
   file:
@@ -10,6 +15,12 @@
     - "/opt/letsencrypt"
     - "/opt/letsencrypt/.well-known/acme-challenge"
   become: true
+
+- name: create acme challenge file
+  copy:
+    dest: "/opt/letsencrypt/.well-known/acme-challenge/test.txt"
+    content: |
+      test
 
 - name: copy local certificate shell script
   copy:
