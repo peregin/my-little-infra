@@ -33,6 +33,9 @@ Certificate
 ===========
 
 sudo certbot -m velocorner.com@gmail.com -d velocorner.com -d www.velocorner.com --webroot -w /opt/letsencrypt --dry-run --test-cert certonly
+sudo certbot -m velocorner.com@gmail.com -d velocorner.com -d www.velocorner.com --webroot -w /opt/letsencrypt certonly
+sudo certbot renew
+https://www.ssllabs.com/ssltest/analyze.html?d=www.velocorner.com&latest
 
 
 

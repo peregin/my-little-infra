@@ -30,17 +30,28 @@
     mode: 0777
   become: true
 
+- name: copy aws certificate shell script
+  copy:
+    src: "aws-certificate.sh"
+    dest: "/opt/letsencrypt/aws-certificate.sh"
+    owner: "{{ ansible_user }}"
+    mode: 0777
+  become: true
+
 - name: create local certificate
   shell: /opt/letsencrypt/local-certificate.sh
   args:
     creates: "/opt/letsencrypt/localhost.crt"
   ignore_errors: True
-#  when: "'velocorner.local' in inventory_hostname"
+  when: "'velocorner.local' in inventory_hostname"
+  become: true
 
-- name: aws inventory check
-  debug:
-    msg: inventory is {{ inventory_hostname }}
+- name: create aws certificate
+  shell: /opt/letsencrypt/aws-certificate.sh
+  args:
+    creates: "/etc/letsencrypt/live/velocorner.com/fullchain.pem"
   when: "'velocorner.com' in inventory_hostname"
+  become: true
 
 - name: install nginx
   yum:
