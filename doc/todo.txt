@@ -1,8 +1,11 @@
 https
 =====
-- insta widget over https
 - wss
-- strava redirect config to https
 - all http should be redirected to https in nginx
 - update references to site (ad, profiles, etc)
 - run Lighthouse
+
+done
+====
+- oayth2(strava, withings) redirect config to https
+- insta widget over https
