@@ -1,11 +1,11 @@
-https
-=====
-- wss
-- update references to site (ad, profiles, etc)
-- run Lighthouse
+todo
+====
 
 done
 ====
+- run Lighthouse
+- wss
+- update references to site (ad, profiles, etc)
 - all http should be redirected to https in nginx
 - oayth2(strava, withings) redirect config to https
 - insta widget over https
