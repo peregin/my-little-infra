@@ -43,7 +43,7 @@ http {
 
     # PUBLIC, https
     server {
-        listen 443 ssl;
+        listen 443 ssl http2;
         server_name velocorner.com www.velocorner.com velocorner.local localhost;
 
         ssl_certificate {{ ssl_crt }};
