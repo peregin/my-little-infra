@@ -38,6 +38,10 @@ sudo certbot renew
 certbot renew --pre-hook "systemctl stop nginx" --post-hook "systemctl start nginx"
 https://www.ssllabs.com/ssltest/analyze.html?d=www.velocorner.com&latest
 
+Datadog
+=======
+sudo systemctl stop datadog-agent
+
 
 
 
