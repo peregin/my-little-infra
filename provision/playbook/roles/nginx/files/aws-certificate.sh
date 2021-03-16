@@ -1,3 +1,10 @@
 #!/bin/bash
 
-certbot -m velocorner.com@gmail.com -d velocorner.com -d www.velocorner.com --webroot -w /opt/letsencrypt certonly
+certbot -m velocorner.com@gmail.com \
+ -d velocorner.com \
+ -d www.velocorner.com \
+ -d status.velocorner.com \
+ -d marketing.velocorner.com \
+ -d docker.velocorner.com \
+ -d storage.velocorner.com \
+ --webroot -w /opt/letsencrypt certonly
