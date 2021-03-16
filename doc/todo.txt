@@ -3,7 +3,7 @@ todo
 
 done
 ====
-- run Lighthouse
+- statuspage nginx setup
 - wss
 - update references to site (ad, profiles, etc)
 - all http should be redirected to https in nginx
