@@ -1,7 +1,7 @@
 ---
 - name: install certbot
   yum:
-    name: certbot
+    name: ['certbot', 'python-certbot-nginx']
     state: present
   become: true
 
@@ -18,9 +18,11 @@
 
 - name: create acme challenge file
   copy:
-    dest: "/opt/letsencrypt/.well-known/acme-challenge/test.txt"
+    dest: "/opt/letsencrypt/.well-known/acme-challenge/{{ item }}"
     content: |
       welcome
+  with_items:
+    - "test.txt"
 
 - name: copy certificate scripts
   copy:
