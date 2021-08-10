@@ -57,6 +57,7 @@
     hour=11
     minute=0
     weekday=1
+    user=root
     job="/opt/letsencrypt/aws-certificate-renew.sh"
     state=present
   when: "'velocorner.com' in inventory_hostname"
