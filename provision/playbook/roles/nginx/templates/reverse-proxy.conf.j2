@@ -110,10 +110,10 @@ http {
         }
     }
 
-    # PUBLIC, HTTP, redirected to https
+    # PUBLIC, HTTP, redirected to https for letsencrypt acme challenge
     server {
         listen 80;
-        server_name velocorner.com www.velocorner.com status.velocorner.com marketing.velocorner.com peregin.com www.peregin.com velocorner.local;
+        server_name velocorner.com www.velocorner.com status.velocorner.com marketing.velocorner.com docker.velocorner.com storage.velocorner.com peregin.com www.peregin.com velocorner.local;
 
         location ~ /.well-known/acme-challenge/ {
             root /opt/letsencrypt;
