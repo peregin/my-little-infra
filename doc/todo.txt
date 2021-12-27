@@ -1,5 +1,6 @@
 todo
 ====
+use configuration service for secrets instead of local directory
 
 done
 ====
