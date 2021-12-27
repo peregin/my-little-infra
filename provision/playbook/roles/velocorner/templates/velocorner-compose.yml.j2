@@ -41,7 +41,7 @@ services:
     networks:
       - backend
     depends_on:
-      - orient_database
+      - psql_database
 
   web-front:
     image: peregin/web-front:latest
