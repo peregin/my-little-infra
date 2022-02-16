@@ -19,33 +19,6 @@ services:
     networks:
       - backend
 
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
-    volumes:
-      - {{ velocorner_dir }}/elasticsearch/data:/usr/share/elasticsearch/data
-    ports:
-      - 9200:9200
-      - 9300:9300
-    environment:
-      - node.name=velo-es
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - xpack.security.enabled=false
-      - discovery.type=single-node
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-      nofile:
-        soft: 65536
-        hard: 65536
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 10s
-        max_attempts: 3
-    networks:
-      - backend
-
   web-app:
     image: peregin/velocorner.com:latest
     command: -Dconfig.file=/web-app/config/web-app.conf {{ web_app_parameter }}
