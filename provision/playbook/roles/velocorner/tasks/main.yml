@@ -11,6 +11,7 @@
     - "{{ velocorner_dir }}/psql"
     - "{{ velocorner_dir }}/psql/data"
     - "{{ velocorner_dir }}/psql/backup"
+    - "{{ velocorner_dir }}/elasticsearch/data"
   become: true
 
 - name: copy web-app {{ web_app_config_file }} configuration file
