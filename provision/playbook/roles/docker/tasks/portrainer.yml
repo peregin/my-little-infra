@@ -7,7 +7,7 @@
 - name: "deploy portainer to {{ inventory_hostname }}"
   docker_container:
     name: portainer
-    image: "portainer/portainer-ce:2.1.1"
+    image: "portainer/portainer-ce:2.11.1"
     state: started
     detach: true
     recreate: false
@@ -23,12 +23,18 @@
   vars:
     ansible_python_interpreter: /usr/bin/python3
 
-- set_fact:
-    portainer_is_running: "{{ portainer_docker.ansible_facts.docker_container.State.Running }}"
+#- name: Print all available facts
+#  ansible.builtin.debug:
+#    var: portainer_docker
 
-- set_fact:
-    portainer_endpoint: "http://{{ portainer_docker.ansible_facts.docker_container.NetworkSettings.IPAddress }}:7000/api"
+- name: "setting running status fact"
+  set_fact:
+    portainer_is_running: "{{ portainer_docker.container.State.Running }}"
+
+- name: "setting portainer ip address fact"
+  set_fact:
+    portainer_endpoint: "http://{{ portainer_docker.container.NetworkSettings.IPAddress }}:7000/api"
 
 - name: print portainer endpoint
   debug:
-    msg: "portrainer running:{{ portainer_is_running }}, endpoint: {{ portainer_endpoint }}"
+    msg: "portainer running:{{ portainer_is_running }}, endpoint: {{ portainer_endpoint }}"
