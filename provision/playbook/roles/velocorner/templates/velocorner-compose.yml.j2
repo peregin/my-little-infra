@@ -19,6 +19,24 @@ services:
     networks:
       - backend
 
+  zinc:
+    image: public.ecr.aws/zinclabs/zinc:latest
+    volumes:
+      - {{ velocorner_dir }}/zinc/data:/data
+    ports:
+      - 4080:4080
+    environment:
+      ZINC_DATA_PATH: "/data"
+      ZINC_FIRST_ADMIN_USER: admin
+      ZINC_FIRST_ADMIN_PASSWORD: "{{ lookup('env', 'ADMIN_PASSWORD') }}"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+    networks:
+      - backend
+
   web-app:
     image: peregin/velocorner.com:latest
     command: -Dconfig.file=/web-app/config/web-app.conf {{ web_app_parameter }}

@@ -11,6 +11,10 @@ a web application stack.
 
 * [VirtualBox](https://www.virtualbox.org/) for local virtualization
 * [Vagrant](https://www.vagrantup.com/) to create a local infrastructure
+  * for Guest additions
+```shell
+vagrant plugin install vagrant-vbguest --plugin-version 0.21
+```
 * [AWS](https://console.aws.amazon.com/console/home?region=us-east-1) to create a remote infrastructure on AWS EC2
   * aws setup for config (region) and credentials (access key id, secret access key)
 * [Ansible](https://www.ansible.com/) for provisioning tool

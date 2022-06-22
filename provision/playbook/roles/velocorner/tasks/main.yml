@@ -14,6 +14,16 @@
     - "{{ velocorner_dir }}/elasticsearch/data"
   become: true
 
+- name: ensure zinc data directory exists
+  file:
+    path: "{{ item }}"
+    owner: "{{ ansible_user }}"
+    mode: 0777
+    state: directory
+  with_items:
+    - "{{ velocorner_dir }}/zinc/data"
+  become: true
+
 - name: copy web-app {{ web_app_config_file }} configuration file
   copy:
     src: "{{ lookup('env', 'APP_CONFIG_DIR') }}/{{ web_app_config_file }}"
