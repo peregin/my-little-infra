@@ -41,6 +41,10 @@ http {
       server 127.0.0.1:7000 max_fails=0;
     }
 
+    upstream search-app {
+      server 127.0.0.1:4080 max_fails=0;
+    }
+
     # PUBLIC, https, web-app
     server {
         listen 443 ssl http2;
@@ -58,7 +62,41 @@ http {
         }
     }
 
-    # DEV, http, web-front
+    # PUBLIC, https, docker-app
+    server {
+        listen 443 ssl http2;
+        server_name docker.velocorner.com;
+        include /etc/nginx/ssl.conf;
+        location / {
+            proxy_set_header      X-Real-IP $remote_addr;
+            proxy_set_header      Host $http_host;
+            proxy_set_header      X-Forwarded-For $remote_addr;
+            proxy_http_version    1.1;
+            proxy_cache_bypass    $http_upgrade;
+            proxy_set_header      Upgrade $http_upgrade;
+            proxy_set_header      Connection "upgrade";
+            proxy_pass            http://docker-app;
+        }
+    }
+
+    # PUBLIC, https, search-app
+    server {
+        listen 443 ssl http2;
+        server_name search.velocorner.com;
+        include /etc/nginx/ssl.conf;
+        location / {
+            proxy_set_header      X-Real-IP $remote_addr;
+            proxy_set_header      Host $http_host;
+            proxy_set_header      X-Forwarded-For $remote_addr;
+            proxy_http_version    1.1;
+            proxy_cache_bypass    $http_upgrade;
+            proxy_set_header      Upgrade $http_upgrade;
+            proxy_set_header      Connection "upgrade";
+            proxy_pass            http://search-app;
+        }
+    }
+
+    # PUBLIC DEV, https, web-front
     server {
         listen 443 ssl http2;
         server_name dev.velocorner.com;
@@ -85,10 +123,10 @@ http {
         }
     }
 
-    # PUBLIC, HTTP, redirected to https for letsencrypt acme challenge
+    # PUBLIC, http, redirect to https AND letsencrypt acme challenge
     server {
         listen 80;
-        server_name velocorner.com www.velocorner.com status.velocorner.com marketing.velocorner.com docker.velocorner.com storage.velocorner.com peregin.com www.peregin.com velocorner.local;
+        server_name velocorner.com www.velocorner.com status.velocorner.com marketing.velocorner.com docker.velocorner.com storage.velocorner.com search.velocorner.com peregin.com www.peregin.com velocorner.local;
 
         location ~ /.well-known/acme-challenge/ {
             root /opt/letsencrypt;
@@ -97,18 +135,6 @@ http {
 
         location / {
             return 301 https://$host$request_uri;
-        }
-    }
-
-    # DOCKER
-    server {
-        listen 80;
-        server_name docker.peregin.com docker.velocorner.local;
-        location / {
-            proxy_set_header   X-Real-IP $remote_addr;
-            proxy_set_header   Host $http_host;
-            proxy_set_header   X-Forwarded-For $remote_addr;
-            proxy_pass         http://docker-app;
         }
     }
 }
