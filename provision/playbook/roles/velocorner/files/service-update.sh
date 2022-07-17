@@ -6,4 +6,5 @@ if [ -z "$SERVICE" ]; then
   exit 1
 fi
 
+echo "updating $SERVICE ..."
 docker service update velocorner_"$SERVICE"

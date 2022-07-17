@@ -37,4 +37,4 @@
 
 - name: print portainer endpoint
   debug:
-    msg: "portainer running:{{ portainer_is_running }}, endpoint: {{ portainer_endpoint }}"
+    msg: "portainer running:{{ portainer_is_running }}, on endpoint: {{ portainer_endpoint }}"
