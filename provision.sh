@@ -5,7 +5,7 @@ PLAYBOOK=${2:-site}
 echo "playbook is $PLAYBOOK.yml"
 
 function printUsage() {
-  echo $"Usage: $(basename "$0") <local|aws> [site|velocorner]"
+  echo "Usage: $(basename "$0") <local|aws> [site|velocorner]"
 }
 
 if [ -z "$ADMIN_PASSWORD" ]; then

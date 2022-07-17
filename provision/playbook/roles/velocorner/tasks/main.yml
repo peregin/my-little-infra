@@ -61,6 +61,14 @@
     job: "{{ velocorner_dir }}/backup-psql.sh"
   become: true
 
+- name: copy service update shell script
+  copy:
+    src: "service-update.sh"
+    dest: "{{ velocorner_dir }}//service-update.sh"
+    owner: "{{ ansible_user }}"
+    mode: 0777
+  become: true
+
 - name: deploy velocorner stack
   shell: "{{ velocorner_dir }}/deploy.sh"
   become: true
