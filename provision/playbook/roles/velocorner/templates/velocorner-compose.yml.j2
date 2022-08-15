@@ -20,7 +20,7 @@ services:
       - backend
 
   zinc:
-    image: public.ecr.aws/zinclabs/zinc:latest
+    image: public.ecr.aws/zinclabs/zinc:0.2.5
     volumes:
       - {{ velocorner_dir }}/zinc/data:/data
     ports:
