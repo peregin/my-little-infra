@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# eventually add peregin.com
 # for testing use --dry-run
 certbot -m velocorner.com@gmail.com \
  -d velocorner.com \
