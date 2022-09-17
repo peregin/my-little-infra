@@ -39,7 +39,7 @@ services:
 
   web-app:
     image: peregin/velocorner.com:latest
-    command: -Dconfig.file=/web-app/config/web-app.conf {{ web_app_parameter }}
+    command: -Dconfig.file=/web-app/config/web-app.conf {{ log_parameter }}
     volumes:
       - {{ velocorner_dir }}/web-app:/web-app/
     ports:
@@ -60,6 +60,28 @@ services:
       - backend
     depends_on:
       - psql_database
+
+  crawler:
+    image: peregin/velocorner.crawler:latest
+    command: -Dconfig.file=/crawler/config/crawler.conf {{ log_parameter }}
+    volumes:
+      - {{ velocorner_dir }}/crawler:/crawler/
+    ports:
+      - 9011:9011
+    environment:
+      HOST_OS_VERSION: "{{ ansible_distribution }} {{ ansible_distribution_version }}"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 256M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    networks:
+      - backend
 
   web-front:
     image: peregin/web-front:latest

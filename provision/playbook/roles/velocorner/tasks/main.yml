@@ -8,6 +8,7 @@
   with_items:
     - "{{ velocorner_dir }}"
     - "{{ velocorner_dir }}/web-app/config"
+    - "{{ velocorner_dir }}/crawler/config"
     - "{{ velocorner_dir }}/psql"
     - "{{ velocorner_dir }}/psql/data"
     - "{{ velocorner_dir }}/psql/backup"
