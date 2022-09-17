@@ -11,5 +11,4 @@ certbot -m velocorner.com@gmail.com \
  -d docker.velocorner.com \
  -d storage.velocorner.com \
  -d search.velocorner.com \
- -d dev.velocorner.com \
  --webroot -w /opt/letsencrypt certonly
