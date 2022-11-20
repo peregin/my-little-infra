@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
+docker container prune -f
 docker image prune -a -f
 docker stack deploy --prune --compose-file {{ velocorner_dir }}/velocorner-compose.yml velocorner
