@@ -81,22 +81,22 @@ services:
     networks:
       - backend
 
-    rates:
-      image: peregin/velocorner.rates:latest
-      ports:
-        - 9012:9012
-      deploy:
-        resources:
-          limits:
-            memory: 128M
-          reservations:
-            memory: 64M
-        restart_policy:
-          condition: on-failure
-          delay: 5s
-          max_attempts: 3
-      networks:
-        - backend
+  rates:
+    image: peregin/velocorner.rates:latest
+    ports:
+      - 9012:9012
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 64M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    networks:
+      - backend
 
   web-front:
     image: peregin/web-front:latest
