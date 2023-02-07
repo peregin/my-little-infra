@@ -63,9 +63,6 @@ services:
 
   crawler:
     image: peregin/velocorner.crawler:latest
-    command: -Dconfig.file=/crawler/config/crawler.conf {{ log_parameter }}
-    volumes:
-      - {{ velocorner_dir }}/crawler:/crawler/
     ports:
       - 9011:9011
     deploy:
@@ -91,6 +88,26 @@ services:
           memory: 128M
         reservations:
           memory: 64M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    networks:
+      - backend
+
+  weather:
+    image: peregin/velocorner.weather:latest
+    command: -Dconfig.file=/weather/config/web-app.conf {{ log_parameter }}
+    volumes:
+      - {{ velocorner_dir }}/web-app:/weather/
+    ports:
+      - 9015:9015
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 128M
       restart_policy:
         condition: on-failure
         delay: 5s
