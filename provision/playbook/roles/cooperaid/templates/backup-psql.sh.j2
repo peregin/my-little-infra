@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+DB_ID=$(docker ps -aqf "name=cooperaid_psql_database")
+DATETIME="`date '+%Y%m%d%H%M'`"
+BACKUP_FILE={{ cooperaid_dir }}/psql/backup/psql-${DATETIME}.sql.gz
+echo "writing backup to ${BACKUP_FILE} ..."
+docker exec -i ${DB_ID} pg_dump -U cooperaid -d cooperaid -c | gzip > ${BACKUP_FILE}

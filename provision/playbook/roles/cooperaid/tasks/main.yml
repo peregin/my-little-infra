@@ -1,0 +1,45 @@
+---
+- name: ensure cooperaid data directory exists
+  file:
+    path: "{{ item }}"
+    owner: "{{ ansible_user }}"
+    mode: 0775
+    state: directory
+  with_items:
+    - "{{ cooperaid_dir }}"
+    - "{{ cooperaid_dir }}/psql/data"
+    - "{{ cooperaid_dir }}/psql/backup"
+  become: true
+
+- name: copy cooperaid docker compose template
+  template:
+    src: cooperaid-compose.yml.j2
+    dest: "{{ cooperaid_dir }}/cooperaid-compose.yml"
+  become: true
+
+- name: copy cooperaid deployment shell script
+  template:
+    src: deploy.sh.j2
+    dest: "{{ cooperaid_dir }}/deploy.sh"
+    mode: 0755
+  become: true
+
+- name: copy cooperaid database backup shell script
+  template:
+    src: backup-psql.sh.j2
+    dest: "{{ cooperaid_dir }}/backup-psql.sh"
+    mode: 0755
+  become: true
+
+- name: setup cron job for cooperaid database backup every wednesday 10am"
+  cron:
+    name: "backup-psql"
+    minute: "0"
+    hour: "10"
+    weekday: "3"
+    job: "{{ cooperaid_dir }}/backup-psql.sh"
+  become: true
+
+- name: deploy cooperaid stack
+  shell: "{{ cooperaid_dir }}/deploy.sh"
+  become: true

@@ -1,0 +1,6 @@
+---
+- hosts: appserver
+  gather_facts: yes
+  roles:
+    - cooperaid
+
