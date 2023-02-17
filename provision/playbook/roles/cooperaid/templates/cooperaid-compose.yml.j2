@@ -19,12 +19,30 @@ services:
     networks:
       - backend
 
+  backend:
+    image: peregin/cooperaid.backend:latest
+    ports:
+      - 9301:9301
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    networks:
+      - backend
+    depends_on:
+      - psql_database
+
   frontend:
     image: peregin/cooperaid.frontend:latest
     ports:
       - 9300:3000
     environment:
-      - API_HOST=http://web-app:9301
       - NODE_ENV=production
     deploy:
       resources:
