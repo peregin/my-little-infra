@@ -23,6 +23,10 @@ services:
     image: peregin/cooperaid.backend:latest
     ports:
       - 9301:9301
+    environment:
+      DB_USER: cooperaid
+      DB_PASSWORD: "{{ lookup('env', 'ADMIN_PASSWORD') }}"
+      DB_URL: jdbc:postgresql://psql_database:5493/cooperaid
     deploy:
       resources:
         limits:
