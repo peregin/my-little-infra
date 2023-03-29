@@ -40,8 +40,6 @@ services:
         max_attempts: 3
     networks:
       - backend
-    depends_on:
-      - psql_database
 
   frontend:
     image: peregin/cooperaid.frontend:latest
