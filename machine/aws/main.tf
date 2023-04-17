@@ -70,4 +70,22 @@ resource "aws_security_group" "instance" {
   }
 }
 
+resource "aws_s3_bucket" "user_data" {
+  bucket = "peregin-user-data"
+}
+
+resource "aws_s3_bucket_ownership_controls" "user_data" {
+  bucket = aws_s3_bucket.user_data.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+resource "aws_s3_bucket_acl" "user_data" {
+  depends_on = [aws_s3_bucket_ownership_controls.user_data]
+
+  bucket = aws_s3_bucket.user_data.id
+  acl    = "private"
+}
+
 
