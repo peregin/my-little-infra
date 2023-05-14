@@ -14,7 +14,7 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-        delay: 5s
+        delay: 10s
         max_attempts: 3
     networks:
       - backend
@@ -51,7 +51,7 @@ services:
           memory: 256M
       restart_policy:
         condition: on-failure
-        delay: 5s
+        delay: 10s
         max_attempts: 3
     networks:
       - backend
