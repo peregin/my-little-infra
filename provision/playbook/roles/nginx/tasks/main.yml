@@ -47,7 +47,7 @@
 - name: create aws certificate
   shell: /opt/letsencrypt/aws-certificate.sh
   args:
-    creates: "/etc/letsencrypt/live/velocorner.com/fullchain.pem"
+    creates: "/etc/letsencrypt/live/velocorner.com-0001/fullchain.pem"
   when: "'velocorner.com' in inventory_hostname"
   become: true
 
