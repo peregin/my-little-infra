@@ -31,12 +31,12 @@
     mode: 0755
   become: true
 
-- name: setup cron job for cooperaid database backup every wednesday 10am"
+- name: setup cron job for cooperaid database backup every mon,wed,fri 10am"
   cron:
     name: "backup-psql"
     minute: "0"
     hour: "10"
-    weekday: "3"
+    weekday: "1,3,5"
     job: "{{ cooperaid_dir }}/backup-psql.sh"
   become: true
 
