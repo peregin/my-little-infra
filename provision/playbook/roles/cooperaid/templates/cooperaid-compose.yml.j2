@@ -28,6 +28,7 @@ services:
       DB_PASSWORD: "{{ lookup('env', 'ADMIN_PASSWORD') }}"
       DB_URL: "jdbc:postgresql://psql_database:5432/cooperaid"
       JWT_SECRET: "{{ lookup('env', 'ADMIN_PASSWORD') }}"
+      JAVA_OPTS: "-Xmx1g"
     deploy:
       restart_policy:
         condition: on-failure
