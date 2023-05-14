@@ -29,11 +29,6 @@ services:
       DB_URL: "jdbc:postgresql://psql_database:5432/cooperaid"
       JWT_SECRET: "{{ lookup('env', 'ADMIN_PASSWORD') }}"
     deploy:
-      resources:
-        limits:
-          memory: 512M
-        reservations:
-          memory: 128M
       restart_policy:
         condition: on-failure
         delay: 5s
