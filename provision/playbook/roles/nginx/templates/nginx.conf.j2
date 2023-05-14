@@ -28,6 +28,7 @@ http {
     proxy_send_timeout            300;
     proxy_read_timeout            300;
     send_timeout                  300;
+    client_max_body_size          100M;
 
     upstream web-front {
       server 127.0.0.1:3000 max_fails=0;
