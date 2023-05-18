@@ -28,11 +28,11 @@ services:
       DB_PASSWORD: "{{ lookup('env', 'ADMIN_PASSWORD') }}"
       DB_URL: "jdbc:postgresql://psql_database:5432/cooperaid"
       JWT_SECRET: "{{ lookup('env', 'ADMIN_PASSWORD') }}"
-      JAVA_OPTS: "-Xmx2g"
+      JAVA_OPTS: "-Xmx2g -server"
     deploy:
       restart_policy:
         condition: on-failure
-        delay: 10s
+        delay: 15s
         max_attempts: 3
     networks:
       - backend
