@@ -7,7 +7,7 @@
 - name: "deploy portainer to {{ inventory_hostname }}"
   docker_container:
     name: portainer
-    image: "portainer/portainer-ce:2.18.3"
+    image: "portainer/portainer-ce:2.19.1"
     state: started
     detach: true
     recreate: false
