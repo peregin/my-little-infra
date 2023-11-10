@@ -21,19 +21,19 @@ provider "aws" {
 resource "aws_instance" "web" {
   # https://aws.amazon.com/marketplace/pp/B00O7WM7QW
   # version 1901_01
-  ami = "ami-d5bf2caa"
+  ami           = "ami-d5bf2caa"
   instance_type = "t2.small"
   key_name      = "aws-peregin"
-  tags = {
+  tags          = {
     Name = "web-infra"
   }
   vpc_security_group_ids = [aws_security_group.instance.id]
 }
 
 resource "aws_security_group" "instance" {
-  name = "web-instance"
+  name        = "web-instance"
   description = "web security group"
-  tags = {
+  tags        = {
     Name = "http-ssh"
   }
 
@@ -55,37 +55,32 @@ resource "aws_security_group" "instance" {
 
   # Inbound SSH from anywhere
   ingress {
-    from_port = 22
-    to_port = 22
-    protocol = "tcp"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   # Outbound everything
   egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
+# Setup S3 bucket to store user data, avatar images, etc.
 resource "aws_s3_bucket" "user_data" {
   bucket = "peregin-user-data"
 }
 
-resource "aws_s3_bucket_ownership_controls" "user_data" {
-  bucket = aws_s3_bucket.user_data.id
-  rule {
-    object_ownership = "BucketOwnerPreferred"
-  }
-}
-
-resource "aws_s3_bucket_acl" "user_data" {
-  depends_on = [aws_s3_bucket_ownership_controls.user_data]
-
-  bucket = aws_s3_bucket.user_data.id
-  acl    = "private"
+resource "aws_s3_bucket_public_access_block" "user_data" {
+  bucket                  = aws_s3_bucket.user_data.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 
