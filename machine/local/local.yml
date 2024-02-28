@@ -3,5 +3,6 @@
   box-image: "centos/7"
   # appears also in the ansible/inventory/local/hosts
   ip: "192.168.0.11"
-  reserved_ports: [80,443,7000,9000]
-  max-ram: 2048
+  reserved_ports: [80,443,7000,8000,9000]
+  # AWS T2.small has 2048 only, local is set to 4096 to experiment with k8s
+  max-ram: 4096
