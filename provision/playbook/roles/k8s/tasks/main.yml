@@ -10,7 +10,7 @@
 
 - name: install kubernetes dependencies
   yum:
-    name: ['kubectl', 'conntrack', 'cri-tools']
+    name: ['kubectl', 'kubeadm', 'conntrack', 'cri-tools']
     state: present
   become: true
 
