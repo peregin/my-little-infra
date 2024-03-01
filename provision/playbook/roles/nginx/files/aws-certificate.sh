@@ -10,4 +10,5 @@ certbot -m velocorner.com@gmail.com \
  -d search.velocorner.com \
  -d peregin.com \
  -d www.peregin.com \
+ -d demo.peregin.com \
  --webroot -w /opt/letsencrypt certonly
