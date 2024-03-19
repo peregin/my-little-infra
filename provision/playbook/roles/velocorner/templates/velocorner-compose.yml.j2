@@ -14,7 +14,7 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-        delay: 600s
+        delay: 300s
         max_attempts: 1
     networks:
       - backend
