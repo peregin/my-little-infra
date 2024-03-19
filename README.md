@@ -48,5 +48,12 @@ Deploys the application stack, mainly running in docker containers.
 provision.sh <env> <stack>
 ```
 
+## Database
+Run psql
+```bash
+docker run -it -v /opt/velocorner/psql/data:/var/lib/postgresql/data -u postgres postgres:12.2-alpine /bin/bash
+pg_resetwal /var/lib/postgresql/data
+```
+
 
 
