@@ -19,7 +19,7 @@ provider "aws" {
 
 # create an EC2 instance
 resource "aws_instance" "web" {
-  # https://aws.amazon.com/marketplace/pp/B00O7WM7QW
+  # https://aws.amazon.com/marketplace/pp/B00O7WM7QW x86_64 HVM
   # version 1901_01
   ami           = "ami-d5bf2caa"
   instance_type = "t2.small"

@@ -1,6 +1,6 @@
 ---
 - name: "velocorner.local"
-  box-image: "centos/7"
+  box-image: "generic-x64/centos9s"
   # appears also in the ansible/inventory/local/hosts
   ip: "192.168.0.11"
   reserved_ports: [80,443,7000,8000,9000]
