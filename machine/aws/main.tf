@@ -24,7 +24,7 @@ resource "aws_instance" "web" {
   ami           = "ami-d5bf2caa"
   instance_type = "t2.small"
   key_name      = "aws-peregin"
-  tags          = {
+  tags = {
     Name = "web-infra"
   }
   vpc_security_group_ids = [aws_security_group.instance.id]
@@ -34,7 +34,7 @@ resource "aws_instance" "web" {
 resource "aws_security_group" "instance" {
   name        = "web-instance"
   description = "web security group"
-  tags        = {
+  tags = {
     Name = "http-ssh"
   }
 
@@ -89,13 +89,22 @@ resource "aws_iam_role" "web_iam_role" {
 
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
-    "Statement": [{
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "ec2.amazonaws.com"
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "ec2.amazonaws.com"
+        },
+        "Action" : "sts:AssumeRole"
       },
-      "Action": "sts:AssumeRole"
-    }]
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "Service": "budgets.amazonaws.com"
+        },
+        "Action": "sts:AssumeRole"
+      }
+    ]
   })
 }
 
@@ -105,24 +114,24 @@ resource "aws_iam_instance_profile" "web_instance_profile" {
 }
 
 resource "aws_iam_role_policy" "web_iam_role_policy" {
-  name = "web_iam_role_policy"
-  role = aws_iam_role.web_iam_role.id
-  policy      = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
+  name   = "web_iam_role_policy"
+  role   = aws_iam_role.web_iam_role.id
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
       {
-        "Effect": "Allow",
-        "Action": ["s3:ListBucket"],
-        "Resource": ["arn:aws:s3:::peregin-user-data"]
+        "Effect" : "Allow",
+        "Action" : ["s3:ListBucket"],
+        "Resource" : ["arn:aws:s3:::peregin-user-data"]
       },
       {
-        "Effect": "Allow",
-        "Action": [
+        "Effect" : "Allow",
+        "Action" : [
           "s3:PutObject",
           "s3:GetObject",
           "s3:DeleteObject"
         ],
-        "Resource": ["arn:aws:s3:::peregin-user-data/*"]
+        "Resource" : ["arn:aws:s3:::peregin-user-data/*"]
       }
     ]
   })
