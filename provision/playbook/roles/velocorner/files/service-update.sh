@@ -7,4 +7,4 @@ if [ -z "$SERVICE" ]; then
 fi
 
 echo "updating $SERVICE ..."
-docker service update velocorner_"$SERVICE"
+docker service update --force velocorner_"$SERVICE"
