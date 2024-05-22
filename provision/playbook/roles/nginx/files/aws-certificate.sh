@@ -7,7 +7,7 @@ certbot -m velocorner.com@gmail.com \
  -d dev.velocorner.com \
  -d status.velocorner.com \
  -d docker.velocorner.com \
- -d search.velocorner.com \
+ -d rates.velocorner.com \
  -d peregin.com \
  -d www.peregin.com \
  -d demo.peregin.com \
