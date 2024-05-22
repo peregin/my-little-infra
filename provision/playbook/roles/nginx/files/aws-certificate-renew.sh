@@ -8,6 +8,6 @@ certbot renew --pre-hook "systemctl stop nginx" --post-hook "systemctl start ngi
 # sudo systemctl restart nginx
 
 # remove old one
-# sudo certbot revoke --cert-name velocorner.com
+# sudo certbot revoke --cert-name velocorner.com-0001
 # list
 # sudo certbot certificates
