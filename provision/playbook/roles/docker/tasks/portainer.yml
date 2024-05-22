@@ -15,6 +15,7 @@
     restart_policy: always
     published_ports: "7000:9000"
     container_default_behavior: compatibility
+    image_name_mismatch: recreate
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: "-H unix:///var/run/docker.sock --admin-password '{{ admin_password_enc.stdout }}{{ admin_password_enc.stdout }}' --logo https://velocorner.com/assets/images/logo100.png"
