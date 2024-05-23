@@ -10,3 +10,7 @@ echo "pulling latest image for $SERVICE ..."
 docker pull peregin/velocorner."$SERVICE":latest
 echo "updating $SERVICE ..."
 docker service update --image peregin/velocorner."$SERVICE":latest --force velocorner_"$SERVICE"
+echo "cleanup..."
+docker container prune -f
+docker image prune -f
+echo "done!"
