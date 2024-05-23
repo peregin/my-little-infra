@@ -6,5 +6,7 @@ if [ -z "$SERVICE" ]; then
   exit 1
 fi
 
+echo "pulling latest image for $SERVICE ..."
+docker pull peregin/velocorner."$SERVICE":latest
 echo "updating $SERVICE ..."
 docker service update --image peregin/velocorner."$SERVICE":latest --force velocorner_"$SERVICE"
