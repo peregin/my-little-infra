@@ -64,8 +64,7 @@
   copy:
     src: "service-update.sh"
     dest: "{{ velocorner_dir }}//service-update.sh"
-    owner: "{{ ansible_user }}"
-    mode: 0777
+    mode: 0755
   become: true
 
 - name: deploy velocorner stack
