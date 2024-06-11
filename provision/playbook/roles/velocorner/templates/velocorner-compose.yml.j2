@@ -33,23 +33,6 @@ services:
         limits:
           memory: 512M
         reservations:
-          memory: 256M
-      restart_policy:
-        condition: on-failure
-        delay: 10s
-        max_attempts: 3
-    networks:
-      - backend
-
-  crawler:
-    image: peregin/velocorner.crawler:latest
-    ports:
-      - 9011:9011
-    deploy:
-      resources:
-        limits:
-          memory: 256M
-        reservations:
           memory: 128M
       restart_policy:
         condition: on-failure
@@ -88,27 +71,7 @@ services:
         limits:
           memory: 256M
         reservations:
-          memory: 128M
-      restart_policy:
-        condition: on-failure
-        delay: 10s
-        max_attempts: 3
-    networks:
-      - backend
-
-  web-front:
-    image: peregin/web-front:latest
-    ports:
-      - 3000:3000
-    environment:
-      - API_HOST=http://web-app:9000
-      - NODE_ENV=production
-    deploy:
-      resources:
-        limits:
-          memory: 512M
-        reservations:
-          memory: 256M
+          memory: 64M
       restart_policy:
         condition: on-failure
         delay: 10s
