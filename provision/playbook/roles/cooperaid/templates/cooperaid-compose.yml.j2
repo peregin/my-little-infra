@@ -33,7 +33,7 @@ services:
       restart_policy:
         condition: on-failure
         delay: 15s
-        max_attempts: 3
+        max_attempts: 2
     networks:
       - backend
 
@@ -48,11 +48,11 @@ services:
         limits:
           memory: 512M
         reservations:
-          memory: 256M
+          memory: 64M
       restart_policy:
         condition: on-failure
         delay: 10s
-        max_attempts: 3
+        max_attempts: 2
     networks:
       - backend
 
